@@ -1,0 +1,17 @@
+<div infiniteScroll [infiniteScrollDistance]="3" (scrolled)="onScroll()" *ngIf="hasData; else tmpl">
+  <app-card-list [animals]="animalList" (open)="openModal($event)"></app-card-list>
+</div>
+<ng-template #tmpl>
+  <div class="wrapper">
+    <div class="message-box">
+      <div class="img">
+        <img src="./assets/images/animal-koala-001.png" alt="" srcset="">
+      </div>
+      <div class="desc">尚無相關資訊</div>
+    </div>
+  </div>
+</ng-template>
+
+<app-photo-modal [model]="photoModel"></app-photo-modal>
+
+<ng-template dynamic-Loading></ng-template>

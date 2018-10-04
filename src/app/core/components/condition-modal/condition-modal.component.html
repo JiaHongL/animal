@@ -1,0 +1,73 @@
+<div class="modal-wrapper condition" [class.hide-modal]="model.isOpen==false" (click)="overModal($event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="title">
+        <span>依條件收尋</span>
+      </div>
+      <div class="close">
+        <a href="javascript:void(0)">
+          <i class="fas fa-times fa-lg font-grey-mint" (click)="closeModal()"></i>
+        </a>
+      </div>
+    </div>
+    <div class="modal-content">
+      <form class="pure-form pure-form-stacked" [formGroup]="form">
+        <fieldset class="no-padding">
+          <div class="pure-control-group">
+            <label for="name">類型</label>
+            <select class="pure-input-1" formControlName="animal_kind">
+              <option *ngFor="let item of codeList.KindList" [value]="item.key">{{item.value}}</option>
+            </select>
+          </div>
+          <div class="pure-control-group">
+            <label for="name">性別</label>
+            <select class="pure-input-1" formControlName="animal_sex">
+              <option *ngFor="let item of codeList.SexList" [value]="item.key">{{item.value}}</option>
+            </select>
+          </div>
+          <div class="pure-control-group">
+            <label for="name">體型</label>
+            <select class="pure-input-1" formControlName="animal_bodytype">
+              <option *ngFor="let item of codeList.BodyTypeList" [value]="item.key">{{item.value}}</option>
+            </select>
+          </div>
+          <div class="pure-control-group">
+            <label for="name">年紀</label>
+            <select class="pure-input-1" formControlName="animal_age">
+              <option *ngFor="let item of codeList.AgeList" [value]="item.key">{{item.value}}</option>
+            </select>
+          </div>
+          <div class="pure-control-group">
+            <label for="name">毛色</label>
+            <select class="pure-input-1" formControlName="animal_colour">
+              <option *ngFor="let item of codeList.ColourList" [value]="item.key">{{item.value}}</option>
+            </select>
+          </div>
+          <div class="pure-control-group">
+            <label for="name">是否絕育</label>
+            <select class="pure-input-1" formControlName="animal_sterilization">
+              <option *ngFor="let item of codeList.SterilizationList" [value]="item.key">{{item.value}}</option>
+            </select>
+          </div>
+          <div class="pure-control-group">
+            <label for="name">是否施打狂犬病</label>
+            <select class="pure-input-1" formControlName="animal_bacterin">
+              <option *ngFor="let item of codeList.BacterinList" [value]="item.key">{{item.value}}</option>
+            </select>
+          </div>
+        </fieldset>
+        <div class="reset">
+          <a href="javascript:void(0)" class="title" (click)="form.reset()">重新設定</a>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="pure-button button-small button-cancel m-r-t hidden-xs" (click)="closeModal()">
+        取消
+      </button>
+      <button class="pure-button button-small button-search m-r-t" (click)="Search()">
+        查詢
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <div class="card-list">
+    <div class="card" *ngFor="let item of animals">
+      <div class="card-header">
+        <a href="javascript:void(0)" class="round-btn">
+          <i class="far fa-heart fa-2x font-red-thunderbird p-l-5" *ngIf="item.isLike==false" (click)="setFavorite(item)"></i>
+          <i class="fas fa-heart fa-2x font-red-thunderbird p-l-5" *ngIf="item.isLike==true" (click)="setFavorite(item)"></i>
+        </a>
+      </div>
+      <div class="card-image">
+        <div class="image-wrapper" (click)="openModal(item.album_file)">
+          <a href="javascript:void(0)">
+            <img src="{{item.album_file||'assets/images/non01.png'}}" alt="">
+          </a>
+        </div>
+      </div>
+      <div class="card-content">
+        <div class="content-desc">
+          <span class="font-blue-steel p-r-5">{{item.animal_id}}</span>
+          <i *ngIf="item.animal_sex=='M'" class="fas fa-mars font-blue fa-lg"></i>
+          <i *ngIf="item.animal_sex=='F'" class="fas fa-venus font-red fa-lg"></i>
+        </div>
+        <a [routerLink]="['/detail',item.animal_id]" target="_blank" class="open-btn">
+          <i class="fas fa-book fa-lg"></i>
+        </a>
+      </div>
+    </div>
+    <div class="card card-dummy" *ngFor="let item of '12345'.split('')"></div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+html,
+body {
+  height: 100%;
+  background:url('./assets/images/brushed_@2X.png');
+}
+
+.container {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 44px 1fr;
+
+  .header {
+    order: 1;
+    width: 100%;
+
+    .header-inner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+  }
+
+  .main {
+    order: 2;
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 55px;
+    background: rgb(0, 105, 92);
+    width: 100%;
+    z-index: 100;
+  }
+}
+
+.go-top {
+  position: fixed;
+  bottom: 80px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  z-index: 200;
+  display: none;
+  text-indent: -999px;
+  border-radius: 50%;
+  border: solid 1px #00796b;
+  background: rgba(0, 105, 92, 0.7);
+}
+
+.go-top:hover {
+  background: rgba(0, 105, 92, 100%);
+}
+

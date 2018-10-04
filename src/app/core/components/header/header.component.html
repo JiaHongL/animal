@@ -1,0 +1,102 @@
+<div class="header-inner">
+  <header>
+    <a [routerLink]="['/adopt']">
+      <img class="logo" src="assets/logo/dog.png">
+    </a>
+  </header>
+  <div class="nav">
+    <span class="nav-menu" (click)="openMenu()">
+      <a href="javascript:void(0)">
+        <i class="fa fa-bars menu-icon" aria-hidden="true"></i>
+      </a>
+    </span>
+    <div class="nav-menu-list" [style.marginRight.px]="isOpenMenu==true ? 0:-284">
+      <div class="close-btn">
+        <a href="javascript:void(0)">
+          <i class="fa fa-lg fa-times" (click)="closeMenu()"></i>
+        </a>
+      </div>
+      <div *ngIf="!isLogin">
+        <div class="list-item" [routerLink]="['/adopt/search']" [queryParams]="{ animal_area_pkid:2 }" (click)="closeMenu()">
+          <a href="javascript:void(0)">
+            <i class="fas fas fa-home fa-lg item-icon"></i>
+            <span class="item-title">首頁</span>
+          </a>
+        </div>
+        <div class="list-item" [routerLink]="['/favorite']" (click)="closeMenu()">
+          <a href="javascript:void(0)">
+            <i class="far fa-kiss-wink-heart fa-lg item-icon"></i>
+            <span class="item-title">我的最愛</span>
+          </a>
+        </div>
+        <div class="list-item" (click)="closeMenu();openModel('conditionModel');">
+          <a href="javascript:void(0)">
+            <i class="fas fa-clipboard-list fa-lg item-icon" style="padding-left:17px;padding-right:23px;"></i>
+            <span class="item-title">條件收尋</span>
+          </a>
+        </div>
+        <div class="list-item" (click)="closeMenu();openModel('areaModel');">
+          <a href="javascript:void(0)">
+            <i class="fas fa-map-signs fa-lg item-icon"></i>
+            <span class="item-title">地區收尋</span>
+          </a>
+        </div>
+        <div class="list-item" (click)="closeMenu();openModel('shelterModel');">
+          <a href="javascript:void(0)">
+            <i class="fas fa-hands-helping fa-lg item-icon p-r-15"></i>
+            <span class="item-title">收容中心收尋</span>
+          </a>
+        </div>
+        <div class="list-item" [routerLink]="['/feedback']" (click)="closeMenu()">
+          <a href="javascript:void(0)">
+            <i class="fas fa-hand-holding-heart  fa-lg item-icon"></i>
+            <span class="item-title">回饋與建議</span>
+          </a>
+        </div>
+        <div class="list-item" [routerLink]="['/login']" (click)="closeMenu()">
+          <a href="javascript:void(0)">
+            <i class="fas fa-users fa-lg item-icon p-r-15"></i>
+            <span class="item-title">管理員登入</span>
+          </a>
+        </div>
+      </div>
+      <div *ngIf="isLogin">
+        <div class="list-item" [routerLink]="['/issues']" (click)="closeMenu()">
+          <a href="javascript:void(0)">
+            <i class="far fa-list-alt fa-lg item-icon"></i>
+            <span class="item-title">待處理</span>
+          </a>
+        </div>
+        <div class="list-item" [routerLink]="['/issues']" (click)="closeMenu()">
+          <a href="javascript:void(0)">
+            <i class="fas fa-clipboard-check fa-lg item-icon p-r-20"></i>
+            <span class="item-title">已歸檔</span>
+          </a>
+        </div>
+        <div class="list-item" [routerLink]="['/login']" (click)="firebaseService.signOut();closeMenu();">
+          <a href="javascript:void(0)">
+            <i class="fas fa-sign-out-alt fa-lg item-icon"></i>
+            <span class="item-title">登出帳號</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- <div class="list-item" (click)="closeMenu()">
+        <a href="javascript:void(0)">
+          <i class="fas fa-envelope fa-lg item-icon"></i>
+          <span class="item-title">意見回饋</span>
+        </a>
+      </div>
+      <div class="list-item" (click)="closeMenu()">
+        <a href="javascript:void(0)">
+          <i class="fas fa-user-alt fa-lg item-icon"></i>
+          <span class="item-title">登入帳號</span>
+        </a>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<app-condition-modal [model]="conditionModel"></app-condition-modal>
+<app-area-modal [model]="areaModel"></app-area-modal>
+<app-shelter-modal [model]="shelterModel"></app-shelter-modal>

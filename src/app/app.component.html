@@ -1,0 +1,12 @@
+<div class="container">
+  <!-- header -->
+  <app-header [isLogin]="isUserLogin"></app-header>
+  <!-- main -->
+  <div class="main p-t-20 p-b-100">
+    <router-outlet (activate)="goTop();isLogin();"></router-outlet>
+  </div>
+  <!-- footer -->
+  <app-footer></app-footer>
+</div>
+
+<a class="go-top"></a>
