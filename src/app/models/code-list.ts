@@ -344,7 +344,7 @@ const ShelterList = [
 const FeedbackTypeList = [
     {
         key: '1',
-        value: '回饋意見'
+        value: '使用回饋'
     }, {
         key: '2',
         value: '建議事項'

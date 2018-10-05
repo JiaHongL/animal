@@ -24,44 +24,46 @@ export class FooterComponent implements OnInit {
 
   setSearchBreadcrumb(route) {
     let queryParams = route.snapshot.queryParams;
+    let breadcrumb = [];
     this.searchBreadcrumb = '';
     if (Object.keys(queryParams).length > 0) {
       Object.keys(queryParams).forEach((objectKey, index) => {
         let type = objectKey;
         let value = queryParams[objectKey];
-
         switch (type) {
           case 'animal_kind':
-            this.searchBreadcrumb += '' + value;
+            breadcrumb.push(value);
             break;
           case 'animal_sex':
-            this.searchBreadcrumb += ', ' + this.filterList('SexList', value);
+            breadcrumb.push(this.filterList('SexList', value));
             break;
           case 'animal_bodytype':
-            this.searchBreadcrumb += ', ' + this.filterList('BodyTypeList', value);
+            breadcrumb.push(this.filterList('BodyTypeList', value));
             break;
           case 'animal_age':
-            this.searchBreadcrumb += ', ' + this.filterList('AgeList', value);
+
+            breadcrumb.push(this.filterList('AgeList', value));
             break;
           case 'animal_colour':
-            this.searchBreadcrumb += ', ' + value;
+            breadcrumb.push(value);
             break;
           case 'animal_sterilization':
-            this.searchBreadcrumb += ' , 是否絕育：' + this.filterList('SterilizationList', value);;
+            breadcrumb.push('是否絕育：' + this.filterList('SterilizationList', value));
             break;
           case 'animal_bacterin':
-            this.searchBreadcrumb += ' , 是否施打狂犬病：' + this.filterList('BacterinList', value);;
+            breadcrumb.push('是否施打狂犬病：' + this.filterList('BacterinList', value));
             break;
           case 'animal_area_pkid':
-            this.searchBreadcrumb += this.filterList('AreaList', value);
+            breadcrumb.push(this.filterList('AreaList', value));
             break;
           case 'animal_shelter_pkid':
-            this.searchBreadcrumb += this.filterList('ShelterList', value);
+            breadcrumb.push(this.filterList('ShelterList', value));
             break;
           default:
             this.searchBreadcrumb = '';
             break;
         }
+        this.searchBreadcrumb = breadcrumb.join(", ");
       });
     }
   }

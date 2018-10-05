@@ -9,7 +9,6 @@ import { FirebaseService } from '../../../core/services/firebase.service';
   styleUrls: ['./feedback.component.scss']
 })
 export class FeedbackComponent implements OnInit {
-  isPost = false;
   codeList = CodeList;
   feedbackForm: FormGroup;
 
@@ -47,10 +46,13 @@ export class FeedbackComponent implements OnInit {
 
   postFeedback() {
     this.feedbackForm.controls.createTime.setValue(new Date());
-    this.firebaseService.postFeedback(this.feedbackForm.value).subscribe((v) => {
-      this.isPost = true;
-    }, (error) => {
-      alert(error);
+    // this.firebaseService.postFeedback(this.feedbackForm.value).then(()=>{
+    //   console.log('ok');
+    // }).catch((error)=>{
+    //   alert(error);
+    // });
+    this.firebaseService.postFeedback(this.feedbackForm.value).subscribe((v)=>{
+      console.log(v);
     })
   }
 

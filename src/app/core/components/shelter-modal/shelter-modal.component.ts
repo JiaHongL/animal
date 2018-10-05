@@ -19,7 +19,6 @@ export class ShelterModalComponent implements AfterViewChecked {
   @Input()
   set model(model) {
     this._model = model;
-    document.querySelector('body').classList.add("no-scroll");
   }
 
   constructor(private router: Router) { 
@@ -27,13 +26,11 @@ export class ShelterModalComponent implements AfterViewChecked {
 
   closeModal() {
     this.model.isOpen = false;
-    document.querySelector('body').classList.remove("no-scroll");
   }
 
   overModal(event) {
     if ((document.getElementsByClassName('modal-wrapper shelter')[0] === (event.target))) {
       this.model.isOpen = false;
-      document.querySelector('body').classList.remove("no-scroll");
     }
   }
 

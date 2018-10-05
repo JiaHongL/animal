@@ -1,5 +1,5 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 
 import { AnimalService } from 'src/app/core/services/animal.service';
@@ -21,7 +21,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
   ],
   declarations: [HeaderComponent, FooterComponent, ConditionModalComponent, AreaModalComponent, ShelterModalComponent],
   exports: [HeaderComponent, FooterComponent, ConditionModalComponent],
-  providers: [AnimalService,DatePipe]
+  providers: [AnimalService]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

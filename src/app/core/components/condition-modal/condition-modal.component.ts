@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, NgZone, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CodeList } from '../../../models/code-list';
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './condition-modal.component.html',
   styleUrls: ['./condition-modal.component.scss']
 })
-export class ConditionModalComponent implements OnInit , AfterViewInit {
+export class ConditionModalComponent implements OnInit {
   codeList = CodeList;
   form: FormGroup;
 
@@ -66,11 +66,5 @@ export class ConditionModalComponent implements OnInit , AfterViewInit {
   }
 
   ngOnInit() {
-    
   }
-
-  ngAfterViewInit(){
-    this.form.reset();
-  }
-
 }

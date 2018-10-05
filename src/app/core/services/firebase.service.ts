@@ -3,7 +3,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs/internal/Observable';
 import { take, map, mergeMap } from 'rxjs/operators';
-import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +12,7 @@ export class FirebaseService {
 
   constructor(
     public afAuth: AngularFireAuth,
-    public afs: AngularFirestore,
-    private dataPipe: DatePipe,
+    public afs: AngularFirestore
   ) {
 
   }
@@ -31,11 +29,8 @@ export class FirebaseService {
     }).valueChanges();
   }
 
-  getRole2(): Observable<{}[]> {
-    return this.afs.collection('users', ref => {
-      let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
-      return query;
-    }).valueChanges();
+  getIssues(): Observable<{}[]> {
+    return this.afs.collection('issues', ref => {return ref;}).valueChanges();
   }
 
   isLogin() {
@@ -67,18 +62,10 @@ export class FirebaseService {
   postFeedback(issue) {
     return this.afs.collection('issues').get().pipe(
       mergeMap((collection) => {
-        issue.id = this.dataPipe.transform(new Date, 'yyyyMMdd') + this.padLeft((collection.size + 1), 4)
+        issue.id = 'no' + (collection.size + 1)
         return this.afs.collection('issues').doc(issue.id).set(issue)
       })
     );
-  }
-
-  padLeft(str,length) {
-    if (str.length >= length){
-      return str;
-    }else{
-      return this.padLeft("0" + str, length);
-    }
   }
 
 

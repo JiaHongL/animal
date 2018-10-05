@@ -6,6 +6,9 @@ const routes: Routes = [
   {
     path: '', redirectTo: 'adopt', pathMatch: 'full'
   },
+  // {
+  //   path: '', redirectTo: 'feedback', pathMatch: 'full'
+  // },
   {
     path: 'adopt',
     loadChildren: 'src/app/pages/adopt/adopt.module#AdoptModule',
