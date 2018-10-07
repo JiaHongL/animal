@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit, NgZone } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { filter } from 'rxjs/internal/operators/filter';
@@ -19,7 +19,8 @@ export class AppComponent implements AfterViewInit, OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private titleService: Title,
-    private firebaseService:FirebaseService
+    private firebaseService: FirebaseService,
+    private ngZone: NgZone
   ) {
 
   }
@@ -28,7 +29,9 @@ export class AppComponent implements AfterViewInit, OnInit {
     document.body.scrollTop = 0;
   }
 
-  isLogin(){
+
+
+  isLogin() {
     this.firebaseService.isLogin().subscribe(isLogin => {
       this.isUserLogin = isLogin;
     });
@@ -66,6 +69,5 @@ export class AppComponent implements AfterViewInit, OnInit {
       }
     }
   }
-
 
 }

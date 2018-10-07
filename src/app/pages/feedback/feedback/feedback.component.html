@@ -1,6 +1,6 @@
 <div class="wrapper">
-  <div class="feedback-form">
-    <form class="pure-form pure-form-stacked"  [formGroup]="feedbackForm" (ngSubmit)="postFeedback()">
+  <div class="feedback-form" *ngIf="!isPost; else tmpl">
+    <form class="pure-form pure-form-stacked" [formGroup]="feedbackForm" (ngSubmit)="postFeedback()">
       <fieldset class="no-padding">
         <legend>
           <h1 class="no-margin">建議與回饋</h1>
@@ -10,26 +10,40 @@
           <option *ngFor="let item of codeList.FeedbackTypeList" value="{{item.key}}">{{item.value}}</option>
         </select>
         <fieldset class="pure-group">
-          <input [ngClass]="{'has-error': feedbackForm.controls.title.touched && feedbackForm.controls.title.invalid}" type="text" style="width:100%" placeholder="標題" formControlName="title">
-          <textarea [ngClass]="{'has-error': feedbackForm.controls.comment.touched && feedbackForm.controls.comment.invalid}" style="width:100%;height:200px;" placeholder="內容" formControlName="comment"></textarea>
+          <input [ngClass]="{'has-error': feedbackForm.controls.title.touched && feedbackForm.controls.title.invalid}"
+            type="text" style="width:100%" placeholder="標題" formControlName="title">
+          <textarea [ngClass]="{'has-error': feedbackForm.controls.comment.touched && feedbackForm.controls.comment.invalid}"
+            style="width:100%;height:200px;" placeholder="內容" formControlName="comment"></textarea>
         </fieldset>
         <div class="user-info-group">
           <div>
             <label class="font-grey-mint" for="createUser">您的名字：</label>
-            <input  [ngClass]="{'has-error': feedbackForm.controls.createUser.touched && feedbackForm.controls.createUser.invalid}" style="width:100%" id="createUser" type="text" placeholder="名字" formControlName="createUser">
+            <input [ngClass]="{'has-error': feedbackForm.controls.createUser.touched && feedbackForm.controls.createUser.invalid}"
+              style="width:100%" id="createUser" type="text" placeholder="名字" formControlName="createUser">
           </div>
           <div>
             <label class="font-grey-mint" for="email">Email：</label>
-            <input [ngClass]="{'has-error': feedbackForm.controls.email.dirty && feedbackForm.controls.email.invalid}"  style="width:100%" id="email" type="text" placeholder="email" formControlName="email">
+            <input [ngClass]="{'has-error': feedbackForm.controls.email.dirty && feedbackForm.controls.email.invalid}"
+              style="width:100%" id="email" type="text" placeholder="email" formControlName="email">
           </div>
         </div>
         <div>
           <span class="pure-form-message text-right font-grey-salsa m-t-b-5 italic font-size-xs">請填寫 標題、內容、姓名</span>
         </div>
         <div class="text-center">
-            <button type="submit" style="width:100%;" class="pure-button button-warning no-margin" [disabled]="feedbackForm.invalid">送出</button>
+          <button type="submit" style="width:100%;" class="pure-button button-warning no-margin" [disabled]="feedbackForm.invalid">送出</button>
         </div>
       </fieldset>
     </form>
   </div>
+  <ng-template #tmpl>
+    <div class="message-box">
+      <div class="img">
+        <img src="./assets/images/person-family-001.png" alt="" srcset="">
+      </div>
+      <div class="desc">非常感謝您的填寫</div>
+    </div>
+  </ng-template>
 </div>
+
+<ng-template dynamic-Loading></ng-template>

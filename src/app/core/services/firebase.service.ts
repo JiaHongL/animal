@@ -1,8 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, LOCALE_ID } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs/internal/Observable';
-import { take, map, mergeMap } from 'rxjs/operators';
+import { take, map, mergeMap, tap } from 'rxjs/operators';
+import { formatDate } from '@angular/common';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +15,9 @@ export class FirebaseService {
 
   constructor(
     public afAuth: AngularFireAuth,
-    public afs: AngularFirestore
+    public afs: AngularFirestore,
+    @Inject(LOCALE_ID) private locale: string
+    
   ) {
 
   }
@@ -30,7 +35,20 @@ export class FirebaseService {
   }
 
   getIssues(): Observable<{}[]> {
-    return this.afs.collection('issues', ref => {return ref;}).valueChanges();
+    return this.afs.collection('issues', ref => { return ref; }).valueChanges();
+  }
+
+  getTotal() {
+    return this.afs.collection('issues', ref => {
+      return ref;
+    }).valueChanges().pipe(
+      map((v) => {
+        let obj = {
+          total: v.length
+        }
+        return obj
+      })
+    );
   }
 
   isLogin() {
@@ -62,11 +80,17 @@ export class FirebaseService {
   postFeedback(issue) {
     return this.afs.collection('issues').get().pipe(
       mergeMap((collection) => {
-        issue.id = 'no' + (collection.size + 1)
+        issue.id = formatDate(issue.createTime, 'yyyyMMdd' , this.locale) + this.padLeft((collection.size + 1), 4);
         return this.afs.collection('issues').doc(issue.id).set(issue)
       })
     );
   }
 
+  padLeft(str, length) {
+    if (str.length >= length)
+      return str;
+    else
+    return this.padLeft("0" +str,length);
+  }
 
 }

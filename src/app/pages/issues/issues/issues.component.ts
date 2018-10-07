@@ -8,12 +8,13 @@ import { tap, map } from 'rxjs/operators';
   styleUrls: ['./issues.component.scss']
 })
 export class IssuesComponent implements OnInit {
+  totalItems = 0;
+  itemsPerPage = 1;
   issues$
 
   constructor(
     public firebaseService: FirebaseService
   ) {
-
   }
 
   Time
@@ -27,6 +28,10 @@ export class IssuesComponent implements OnInit {
         })
       })
     );
+
+    this.firebaseService.getTotal().subscribe((v)=>{
+      this.totalItems = v.total;
+    });
   }
   transformTimestampToDate(item, name) {
     item[name] = item[name].toDate()

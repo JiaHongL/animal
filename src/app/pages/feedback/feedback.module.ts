@@ -5,12 +5,15 @@ import { FeedbackRoutingModule } from './feedback-routing.module';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
+import { LoadingModule } from '../../feature/loading/loading.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FeedbackRoutingModule,
     ReactiveFormsModule, 
-    FormsModule
+    FormsModule,
+    LoadingModule
   ],
   declarations: [FeedbackComponent]
 })

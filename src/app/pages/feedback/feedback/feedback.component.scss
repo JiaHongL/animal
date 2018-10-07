@@ -43,4 +43,28 @@
     }
   }
 
+  .message-box{
+    min-height: 350px;
+    min-width:350px;
+    margin:0 20px 0 20px;
+    .img{
+        width:350px;
+        height:350px;
+        img{
+            max-width: 100%;
+            height: auto;
+        }
+    }
+    .desc{
+        height: 100%;
+        width: 100%;
+        display:flex;
+        justify-content:center;
+        align-items: center;
+        font-size: 25px;
+        font-weight: lighter !important;
+        text-align: center;
+    }
+}
+
 }

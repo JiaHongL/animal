@@ -1,6 +1,7 @@
 import { Component, Input, AfterViewChecked } from '@angular/core';
 import { CodeList } from '../../../models/code-list';
 import { Router } from '@angular/router';
+import { UtilService } from '../../services/util.service';
 @Component({
   selector: 'app-shelter-modal',
   templateUrl: './shelter-modal.component.html',
@@ -19,13 +20,22 @@ export class ShelterModalComponent implements AfterViewChecked {
   @Input()
   set model(model) {
     this._model = model;
+    if(this._model.isOpen && this.utilService.isMobile()){
+      this.utilService.stopBodyScroll(true);
+    };
   }
 
-  constructor(private router: Router) { 
+  constructor(
+    private router: Router,
+    private utilService:UtilService
+  ) { 
   }
 
   closeModal() {
     this.model.isOpen = false;
+    if(this.utilService.isMobile()){
+      this.utilService.stopBodyScroll(false);
+    };
   }
 
   overModal(event) {

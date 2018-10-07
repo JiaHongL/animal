@@ -11,6 +11,8 @@ import { ConditionModalComponent } from './components/condition-modal/condition-
 import { AreaModalComponent } from './components/area-modal/area-modal.component';
 import { ShelterModalComponent } from './components/shelter-modal/shelter-modal.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { UtilService } from './services/util.service';
+import { FirebaseService } from './services/firebase.service';
 
 @NgModule({
   imports: [
@@ -21,7 +23,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
   ],
   declarations: [HeaderComponent, FooterComponent, ConditionModalComponent, AreaModalComponent, ShelterModalComponent],
   exports: [HeaderComponent, FooterComponent, ConditionModalComponent],
-  providers: [AnimalService]
+  providers: [AnimalService, UtilService, FirebaseService]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

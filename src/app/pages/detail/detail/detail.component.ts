@@ -36,6 +36,13 @@ export class DetailComponent implements OnInit {
     this.photoModel = { ...this.photoModel };
   }
 
+  isIos() {
+    var ua = navigator.userAgent.toLowerCase();
+    if (/iphone|ipad|ipod/.test(ua)) {
+          document.querySelectorAll('.no-touch')[0].classList.remove('no-touch');
+      }
+  }
+
   ngOnInit() {
     this.loadingService.creatComponent(this.componentHost.viewContainerRef, 'loading02');
     let id = this.activatedRoute.snapshot.paramMap.get('id')
@@ -44,6 +51,7 @@ export class DetailComponent implements OnInit {
         this.loadingService.onDestroy();
       })
     );
+    this.isIos();
   }
 
 }

@@ -1,7 +1,8 @@
 html,
 body {
   height: 100%;
-  background:url('./assets/images/brushed_@2X.png');
+  background:url('./assets/images/brushed_@2X.png'); 
+  cursor: pointer;
 }
 
 .container {
@@ -41,8 +42,8 @@ body {
   position: fixed;
   bottom: 80px;
   right: 30px;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   z-index: 200;
   display: none;
   text-indent: -999px;

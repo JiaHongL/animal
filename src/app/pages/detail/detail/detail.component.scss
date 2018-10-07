@@ -50,7 +50,7 @@
 
     position: relative;
 
-    &:hover::before {
+    .no-touch &:hover::before {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -95,6 +95,18 @@
 
     .row-xs-4 {
       grid-row: 4 span;
+    }
+
+    .row-xs-5 {
+      grid-row: 5 span;
+    }
+
+    .row-xs-6 {
+      grid-row: 6 span;
+    }
+
+    .row-xs-7 {
+      grid-row: 7 span;
     }
 
     .xs-hide {

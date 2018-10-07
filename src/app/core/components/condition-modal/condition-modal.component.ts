@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, NgZone } from '@angular/core';
+import { Component, OnInit, Input, NgZone, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CodeList } from '../../../models/code-list';
 import { Router } from '@angular/router';
+import { UtilService } from '../../services/util.service';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './condition-modal.component.html',
   styleUrls: ['./condition-modal.component.scss']
 })
-export class ConditionModalComponent implements OnInit {
+export class ConditionModalComponent implements OnInit, AfterViewInit {
   codeList = CodeList;
   form: FormGroup;
 
@@ -23,12 +24,16 @@ export class ConditionModalComponent implements OnInit {
   @Input()
   set model(model) {
     this._model = model;
+    if(this._model.isOpen && this.utilService.isMobile()){
+      this.utilService.stopBodyScroll(true);
+    };
   }
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private utilService:UtilService,
   ) {
     this.form = this.fb.group({
       animal_kind: ['', ''],
@@ -43,6 +48,9 @@ export class ConditionModalComponent implements OnInit {
 
   closeModal() {
     this.model.isOpen = false;
+    if(this.utilService.isMobile()){
+      this.utilService.stopBodyScroll(false);
+    };
   }
 
   overModal(event) {
@@ -66,5 +74,9 @@ export class ConditionModalComponent implements OnInit {
   }
 
   ngOnInit() {
+
+  }
+  ngAfterViewInit() {
+    this.form.reset();
   }
 }

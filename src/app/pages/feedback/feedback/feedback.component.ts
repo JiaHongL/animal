@@ -1,7 +1,9 @@
 import { CodeList } from '../../../models/code-list';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseService } from '../../../core/services/firebase.service';
+import { LoadingDirective } from '../../../feature/loading/loading.directive';
+import { LoadingService } from '../../../feature/loading/loading.service';
 
 @Component({
   selector: 'app-feedback',
@@ -9,12 +11,15 @@ import { FirebaseService } from '../../../core/services/firebase.service';
   styleUrls: ['./feedback.component.scss']
 })
 export class FeedbackComponent implements OnInit {
+  isPost = false;
   codeList = CodeList;
   feedbackForm: FormGroup;
+  @ViewChild(LoadingDirective) componentHost: LoadingDirective;
 
   constructor(
     private fb: FormBuilder,
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+    private loadingService: LoadingService,
   ) {
     this.feedbackForm = this.fb.group({
       id: ['', ''],
@@ -45,15 +50,14 @@ export class FeedbackComponent implements OnInit {
   }
 
   postFeedback() {
+    this.loadingService.creatComponent(this.componentHost.viewContainerRef, 'loading03');
     this.feedbackForm.controls.createTime.setValue(new Date());
-    // this.firebaseService.postFeedback(this.feedbackForm.value).then(()=>{
-    //   console.log('ok');
-    // }).catch((error)=>{
-    //   alert(error);
-    // });
     this.firebaseService.postFeedback(this.feedbackForm.value).subscribe((v)=>{
-      console.log(v);
-    })
+      setTimeout(() => {
+        this.isPost = true;
+        this.loadingService.onDestroy();
+      }, 600);
+    });
   }
 
   ngOnInit() {

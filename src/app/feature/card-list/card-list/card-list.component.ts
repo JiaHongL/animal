@@ -37,7 +37,16 @@ export class CardListComponent implements OnInit {
     this.animalService.setFavorite(item);
   }
 
+  isIos() {
+    var ua = navigator.userAgent.toLowerCase();
+    if (/iphone|ipad|ipod/.test(ua)) {
+          document.querySelectorAll('.no-touch')[0].classList.remove('no-touch');
+      }
+  }
+
+
   ngOnInit() {
+      this.isIos();
   }
 
 }
