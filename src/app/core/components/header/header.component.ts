@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, ChangeDetectorRef, Input } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
+import { UtilService } from '../../services/util.service';
 
 @Component({
   selector: 'app-header',
@@ -34,7 +35,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private eRef: ElementRef,
     public changeDetectorRef: ChangeDetectorRef,
-    public firebaseService: FirebaseService
+    public firebaseService: FirebaseService,
+    private utilService:UtilService
   ) { 
 
   }
@@ -59,7 +61,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.utilService.isIosNoTouch();
   }
 
 }

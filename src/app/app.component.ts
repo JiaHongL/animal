@@ -49,7 +49,9 @@ export class AppComponent implements AfterViewInit, OnInit {
         filter((route) => route.outlet === 'primary'),
         mergeMap((route) => route.data)
       )
-      .subscribe((event) => this.titleService.setTitle(event['title']));
+      .subscribe((event) => {
+        this.titleService.setTitle(event['title']);
+      });
   }
 
   ngAfterViewInit() {

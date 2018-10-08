@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { AnimalService } from '../../../core/services/animal.service';
 import { Animal } from '../../../models/animal';
+import { UtilService } from '../../../core/services/util.service';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class CardListComponent implements OnInit {
   @Output() open = new EventEmitter();
 
   constructor(
-    private animalService:AnimalService
+    private animalService:AnimalService,
+    private utilService:UtilService
   ) { }
 
 
@@ -37,16 +39,8 @@ export class CardListComponent implements OnInit {
     this.animalService.setFavorite(item);
   }
 
-  isIos() {
-    var ua = navigator.userAgent.toLowerCase();
-    if (/iphone|ipad|ipod/.test(ua)) {
-          document.querySelectorAll('.no-touch')[0].classList.remove('no-touch');
-      }
-  }
-
-
   ngOnInit() {
-      this.isIos();
+      this.utilService.isIosNoTouch();
   }
 
 }

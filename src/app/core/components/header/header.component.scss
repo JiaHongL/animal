@@ -21,7 +21,7 @@
     width: 44px;
     height: 44px;
 
-    &:hover {
+    .no-touch &:hover {
       background-color: #8d6e63;
       border-left: solid 1px #8d6e63;
       box-shadow: -1px 0 0 #795548;
@@ -53,7 +53,6 @@
       width: 284px;
       background-color: rgb(0, 105, 92);
       overflow: auto;
-      -webkit-transition: margin-right 0.3s ease-in-out;
       transition: margin-right 0.3s ease-in-out;
 
       .close-btn {
@@ -87,7 +86,7 @@
           color: white;
         }
 
-        &:hover {
+        .no-touch &:hover {
           background-color: #8d6e63;
         }
       }
@@ -120,7 +119,7 @@
 
         }
 
-        &:hover {
+        .no-touch &:hover {
           background-color: #00796bc0;
         }
       }

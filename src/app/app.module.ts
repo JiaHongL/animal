@@ -12,6 +12,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AuthGuardGuard } from './auth-guard.guard';
+import { AutoLoginGuard } from './auto-login.guard';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { AuthGuardGuard } from './auth-guard.guard';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule // imports firebase/storage only needed for storage features
   ],
-  providers: [AuthGuardGuard],
+  providers: [AuthGuardGuard, AutoLoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

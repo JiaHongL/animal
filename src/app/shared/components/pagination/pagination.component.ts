@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
@@ -31,6 +31,9 @@ export class PaginationComponent implements OnInit {
   set itemsPerPage(count) {
     this._itemsPerPage = count;
   }
+
+  @Output('set-page') setPage = new EventEmitter<number>();
+
 
   constructor(
     private changeDetectorRef:ChangeDetectorRef
@@ -76,6 +79,7 @@ export class PaginationComponent implements OnInit {
       this.pageUnit -= 1;
     };
     this.setShowMinMaxPage();
+    this.setPage.emit(this.currentPage);
   }
 
   incrementCurrentPage(v) {
@@ -87,6 +91,7 @@ export class PaginationComponent implements OnInit {
       this.pageUnit = this.pageUnit + 1;
     };
     this.setShowMinMaxPage();
+    this.setPage.emit(this.currentPage);
   }
 
   decrementCurrentPage(v) {
@@ -99,6 +104,7 @@ export class PaginationComponent implements OnInit {
       this.pageUnit = this.pageUnit - 1;
     };
     this.setShowMinMaxPage();
+    this.setPage.emit(this.currentPage);
   }
 
   ngOnInit() {

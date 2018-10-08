@@ -7,6 +7,7 @@ import { finalize } from 'rxjs/operators';
 import { AnimalService } from '../../../core/services/animal.service';
 import { Animal } from '../../../models/animal';
 import { PhotoModel } from '../../../shared/components/photo-modal/photo.interface';
+import { UtilService } from '../../../core/services/util.service';
 
 @Component({
   selector: 'app-detail',
@@ -28,19 +29,13 @@ export class DetailComponent implements OnInit {
     public animalService: AnimalService,
     private activatedRoute: ActivatedRoute,
     private loadingService: LoadingService,
+    private utilService:UtilService
   ) { }
 
   openModal(src) {
     this.photoModel.isOpen = true;
     this.photoModel.url = src;
     this.photoModel = { ...this.photoModel };
-  }
-
-  isIos() {
-    var ua = navigator.userAgent.toLowerCase();
-    if (/iphone|ipad|ipod/.test(ua)) {
-          document.querySelectorAll('.no-touch')[0].classList.remove('no-touch');
-      }
   }
 
   ngOnInit() {
@@ -51,7 +46,7 @@ export class DetailComponent implements OnInit {
         this.loadingService.onDestroy();
       })
     );
-    this.isIos();
+    this.utilService.isIosNoTouch();
   }
 
 }

@@ -358,7 +358,7 @@ const FeedbackTypeList = [
 const IssuesStatusList = [
     {
         key: '0',
-        value: '使用者提交'
+        value: '提交'
     }, {
         key: '1',
         value: '追蹤中'

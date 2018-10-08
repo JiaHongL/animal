@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../../core/services/firebase.service';
 import { tap, map } from 'rxjs/operators';
+import { UtilService } from '../../../core/services/util.service';
 
 @Component({
   selector: 'app-issues',
@@ -9,35 +10,43 @@ import { tap, map } from 'rxjs/operators';
 })
 export class IssuesComponent implements OnInit {
   totalItems = 0;
-  itemsPerPage = 1;
+  itemsPerPage = 10;
+  currentPage = 1;
+
   issues$
 
   constructor(
-    public firebaseService: FirebaseService
+    public firebaseService: FirebaseService,
+    private utilService:UtilService
   ) {
   }
 
-  Time
-
-  ngOnInit() {
-    this.issues$ = this.firebaseService.getIssues().pipe(
-      // tap((v:any) => console.log(v)),
+  search(page) {
+    this.issues$ = this.firebaseService.getIssues(page).pipe(
+      tap((v: any) => console.log(v)),
       map((v: any) => {
         return v.map((item) => {
-          return this.transformTimestampToDate(item, 'createTime');
+          return this.utilService.transformTimestampToDate(item, 'createTime');
         })
       })
     );
+  }
 
-    this.firebaseService.getTotal().subscribe((v)=>{
+  setCurrentPage(v) {
+    this.currentPage = v;
+    this.search(this.currentPage);
+  }
+
+  openIssue(id) {
+    window.open('#/backend/issue/' + id);
+  }
+
+  ngOnInit() {
+    this.firebaseService.getTotal().subscribe((v) => {
       this.totalItems = v.total;
+      this.search(this.currentPage);
     });
   }
-  transformTimestampToDate(item, name) {
-    item[name] = item[name].toDate()
-    return item;
-  }
-
 
 
 }

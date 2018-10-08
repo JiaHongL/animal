@@ -2,7 +2,20 @@ html,
 body {
   height: 100%;
   background:url('./assets/images/brushed_@2X.png'); 
-  cursor: pointer;
+}
+
+@include media-breakpoint-only(xs) {
+  html,
+  body {
+    cursor: pointer;
+  }
+}
+
+@include media-breakpoint-only(sm) {
+  html,
+  body {
+    cursor: pointer;
+  }
 }
 
 .container {

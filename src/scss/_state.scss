@@ -84,6 +84,19 @@
   }
 }
 
+.visible-xs-block,
+.visible-xs-inline,
+.visible-xs-inline-block, {
+  display: none !important;
+}
+
+@include media-breakpoint-only(xs) {
+  .visible-xs-inline{
+    display: inline-block !important;
+  }
+}
+
+
 
 .w-200{
   width: 200px;

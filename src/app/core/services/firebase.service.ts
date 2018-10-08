@@ -11,13 +11,14 @@ import { formatDate } from '@angular/common';
   providedIn: 'root'
 })
 export class FirebaseService {
+  issuePageIdList = [];
 
 
   constructor(
     public afAuth: AngularFireAuth,
     public afs: AngularFirestore,
     @Inject(LOCALE_ID) private locale: string
-    
+
   ) {
 
   }
@@ -26,29 +27,17 @@ export class FirebaseService {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
+  signOut() {
+    this.afAuth.auth.signOut();
+  }
+
+
   getRole(uid): Observable<{}[]> {
     return this.afs.collection('users', ref => {
       let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
       query = query.where('uid', '==', uid)
       return query;
     }).valueChanges();
-  }
-
-  getIssues(): Observable<{}[]> {
-    return this.afs.collection('issues', ref => { return ref; }).valueChanges();
-  }
-
-  getTotal() {
-    return this.afs.collection('issues', ref => {
-      return ref;
-    }).valueChanges().pipe(
-      map((v) => {
-        let obj = {
-          total: v.length
-        }
-        return obj
-      })
-    );
   }
 
   isLogin() {
@@ -73,14 +62,10 @@ export class FirebaseService {
     return this.afAuth.authState;
   }
 
-  signOut() {
-    this.afAuth.auth.signOut();
-  }
-
   postFeedback(issue) {
     return this.afs.collection('issues').get().pipe(
       mergeMap((collection) => {
-        issue.id = formatDate(issue.createTime, 'yyyyMMdd' , this.locale) + this.padLeft((collection.size + 1), 4);
+        issue.id = formatDate(issue.createTime, 'yyyyMMdd', this.locale) + this.padLeft((collection.size + 1), 4);
         return this.afs.collection('issues').doc(issue.id).set(issue)
       })
     );
@@ -90,7 +75,41 @@ export class FirebaseService {
     if (str.length >= length)
       return str;
     else
-    return this.padLeft("0" +str,length);
+      return this.padLeft("0" + str, length);
+  }
+
+  getTotal() {
+    this.issuePageIdList = [];
+    return this.afs.collection('issues', ref => {
+      return ref;
+    }).valueChanges().pipe(
+      map((v) => {
+        let obj = {
+          total: v.length
+        };
+        v.map((v: any, index) => {
+          if ((index % 10) == 0) {
+            this.issuePageIdList.push(v.id);
+          };
+        });
+        return obj
+      })
+    );
+  }
+
+  getIssues(page): Observable<{}[]> {
+    return this.afs.collection('issues',
+      ref => {
+        let startId = this.issuePageIdList[page - 1];
+        return ref.orderBy('id').startAt(startId).limit(10)
+      }).valueChanges();
+  }
+
+  getIssue(id): Observable<{}[]> {
+    return this.afs.collection('issues',
+      ref => {
+        return ref.where('id','==',id)
+      }).valueChanges();
   }
 
 }

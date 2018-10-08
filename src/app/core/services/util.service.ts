@@ -23,8 +23,22 @@ export class UtilService {
     }
   }
 
-  isMobile(){
+  isMobile() {
     return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+  }
+
+  isIosNoTouch() {
+    let ua = navigator.userAgent.toLowerCase();
+    if (/iphone|ipad|ipod/.test(ua)) {
+      Array.from(document.querySelectorAll('.no-touch')).forEach((element) => {
+        element.classList.remove('no-touch');
+      });
+    };
+  }
+
+  transformTimestampToDate(item, name) {
+    item[name] = item[name].toDate()
+    return item;
   }
 
 }

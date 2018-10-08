@@ -1,6 +1,4 @@
-import { Data } from "@angular/router";
-
-export class Animal {
+export class Issue {
     status:string;
     type: string;
     title:string;

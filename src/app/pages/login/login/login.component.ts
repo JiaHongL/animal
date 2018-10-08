@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     this.firebaseService.login(this.loginForm.value.email, this.loginForm.value.password)
       .then((user) => {
         this.hasError = false;
-        this.router.navigate(['issues']);
+        this.router.navigate(['/backend/issues']);
         this.loadingService.onDestroy();
       }).catch((error) => {
         this.hasError = true;
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
       this.loadingService.creatComponent(this.componentHost.viewContainerRef, 'loading03');
       if (isLogin) {
         setTimeout(() => {
-          this.router.navigate(['issues']);
+          this.router.navigate(['/backend/issues']);
           this.loadingService.onDestroy();
         },800);
       }else{
