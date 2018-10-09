@@ -68,7 +68,9 @@
     box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;
     border-color: #000\9;
 }
-
+.button-secondary.pure-button-active{
+    background: #238dad;
+}
 .pure-button[disabled],
 .pure-button-disabled,
 .pure-button-disabled:hover,

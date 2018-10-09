@@ -8,6 +8,7 @@ import { UtilService } from '../../../core/services/util.service';
 import { LoadingService } from '../../../feature/loading/loading.service';
 import { LoadingDirective } from '../../../feature/loading/loading.directive';
 import { Subscription } from 'rxjs';
+import { User } from '../../../models/user';
 
 @Component({
   selector: 'app-issue-detail',
@@ -19,24 +20,37 @@ import { Subscription } from 'rxjs';
 })
 export class IssueDetailComponent implements OnInit {
   @ViewChild(LoadingDirective) componentHost: LoadingDirective;
-  issueSubscription:Subscription;
-  issue$:Observable<any>;
+  issueSubscription: Subscription;
+  issue$: Observable<any>;
+
   id = '';
+
+  addHistoryModel = {
+    name: '',
+    issue: {}
+  }
+
+  isOpen = {
+    status: false
+  };
+
 
   constructor(
     private firebaseService: FirebaseService,
 
     private activatedRoute: ActivatedRoute,
     private utilService: UtilService,
-    private loadingService: LoadingService,
+    private loadingService: LoadingService
   ) {
 
   }
 
-
-  getIssue(){
+  getIssue() {
     this.loadingService.creatComponent(this.componentHost.viewContainerRef, 'loading02');
     this.issue$ = this.firebaseService.getIssue(this.id).pipe(
+      tap((issue: [Issue]) => {
+        this.addHistoryModel.issue = issue[0];
+      }),
       map((v: [Issue]) => {
         let issue: Issue = v[0];
         this.utilService.transformTimestampToDate(issue, 'createTime');
@@ -51,9 +65,16 @@ export class IssueDetailComponent implements OnInit {
     );
   }
 
+  openModal() {
+    this.isOpen = { ...this.isOpen, ...{ status: true } };
+  }
+
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.getIssue();
+    this.firebaseService.getUserInfo().subscribe((user: User[]) => {
+      this.addHistoryModel.name = user[0].name;
+    });
   }
 
 }

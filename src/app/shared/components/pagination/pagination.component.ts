@@ -36,7 +36,7 @@ export class PaginationComponent implements OnInit {
 
 
   constructor(
-    private changeDetectorRef:ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef
   ) { }
 
   setPages(totalItems, itemsPerPage) {
@@ -45,12 +45,12 @@ export class PaginationComponent implements OnInit {
     this.currentPage = 0;
     this.showMinPage = 0;
     this.showMaxPage = 0;
-    if (totalItems > 1) {
+    if (totalItems >= 1) {
       this.currentPage = 1;
       this.setShowMinMaxPage();
     };
-    let count = Math.floor(this._totalItems / this._itemsPerPage);
-    if ((this._totalItems % this._itemsPerPage) > 0) {
+    let count = Math.floor(this.totalItems / this.itemsPerPage);
+    if ((this.totalItems % this.itemsPerPage) > 0) {
       count += 1;
     };
     for (let i = 0; i < count; i++) {
@@ -68,10 +68,16 @@ export class PaginationComponent implements OnInit {
   }
 
   canShowPage(value) {
-    return (this.showMinPage <= value && value <= this.showMaxPage);
+    let canShow = false;
+    if (this.pages.length == 1) {
+      canShow = true;
+    } else {
+      canShow = this.showMinPage <= value && value <= this.showMaxPage;
+    }
+    return canShow;
   }
-  
-  setCurrentPage(v){
+
+  setCurrentPage(v) {
     this.currentPage = v;
     if (this.currentPage > this.showMaxPage) {
       this.pageUnit += 1;
@@ -87,7 +93,7 @@ export class PaginationComponent implements OnInit {
     if (this.currentPage > this.pages.length) {
       this.currentPage = this.pages.length;
     };
-    if(this.currentPage > this.showMaxPage) {
+    if (this.currentPage > this.showMaxPage) {
       this.pageUnit = this.pageUnit + 1;
     };
     this.setShowMinMaxPage();
@@ -100,7 +106,7 @@ export class PaginationComponent implements OnInit {
       this.currentPage = 1;
       this.pageUnit = 0;
     };
-    if(this.currentPage < this.showMinPage) {
+    if (this.currentPage < this.showMinPage) {
       this.pageUnit = this.pageUnit - 1;
     };
     this.setShowMinMaxPage();

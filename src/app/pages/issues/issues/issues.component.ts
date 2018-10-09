@@ -12,29 +12,31 @@ export class IssuesComponent implements OnInit {
   totalItems = 0;
   itemsPerPage = 10;
   currentPage = 1;
+  queryStatus = -1;
+
+  pages = [];
 
   issues$
 
   constructor(
     public firebaseService: FirebaseService,
-    private utilService:UtilService
+    private utilService: UtilService
   ) {
-  }
-
-  search(page) {
-    this.issues$ = this.firebaseService.getIssues(page).pipe(
-      tap((v: any) => console.log(v)),
-      map((v: any) => {
-        return v.map((item) => {
-          return this.utilService.transformTimestampToDate(item, 'createTime');
-        })
-      })
-    );
   }
 
   setCurrentPage(v) {
     this.currentPage = v;
-    this.search(this.currentPage);
+  }
+
+  setQueryStatus(v) {
+    this.queryStatus = v;
+    this.currentPage = 1;
+    this.firebaseService.getIssues(this.queryStatus).subscribe((v) => {
+      this.totalItems = v.total;
+      this.pages = v.pages;
+      console.log(v);
+    });
+
   }
 
   openIssue(id) {
@@ -42,11 +44,7 @@ export class IssuesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.firebaseService.getTotal().subscribe((v) => {
-      this.totalItems = v.total;
-      this.search(this.currentPage);
-    });
+    this.setQueryStatus(-1);
   }
-
 
 }

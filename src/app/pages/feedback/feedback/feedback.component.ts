@@ -11,6 +11,7 @@ import { LoadingService } from '../../../feature/loading/loading.service';
   styleUrls: ['./feedback.component.scss']
 })
 export class FeedbackComponent implements OnInit {
+  resetNoticeSubscription;
   isPost = false;
   codeList = CodeList;
   feedbackForm: FormGroup;
@@ -52,7 +53,7 @@ export class FeedbackComponent implements OnInit {
   postFeedback() {
     this.loadingService.creatComponent(this.componentHost.viewContainerRef, 'loading03');
     this.feedbackForm.controls.createTime.setValue(new Date());
-    this.firebaseService.postFeedback(this.feedbackForm.value).subscribe((v)=>{
+    this.firebaseService.postFeedback(this.feedbackForm.value).subscribe((v) => {
       setTimeout(() => {
         this.isPost = true;
         this.loadingService.onDestroy();
@@ -61,7 +62,27 @@ export class FeedbackComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.resetNoticeSubscription = this.firebaseService.getResetFeedbackFormNotice()
+      .subscribe((v) => {
+        this.isPost = false;
+        this.feedbackForm.reset();
+        this.feedbackForm.setValue({
+          id: '',
+          status: 0,
+          type: 1,
+          title: '',
+          createTime: '',
+          createUser: '',
+          comment: '',
+          email: '',
+          history: [{
+            status: 0,
+            createTime: '',
+            createUser: '',
+            remark: '使用者提交',
+          }]
+        });
+      });
   }
 
 }

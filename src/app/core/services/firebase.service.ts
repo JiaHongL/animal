@@ -4,6 +4,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs/internal/Observable';
 import { take, map, mergeMap, tap } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
+import { Subject } from 'rxjs';
+import { UtilService } from './util.service';
 
 
 
@@ -11,12 +13,15 @@ import { formatDate } from '@angular/common';
   providedIn: 'root'
 })
 export class FirebaseService {
-  issuePageIdList = [];
 
+  resetFeedbackFormSubject$ = new Subject();
+
+  issuePageIdList = [];
 
   constructor(
     public afAuth: AngularFireAuth,
     public afs: AngularFirestore,
+    private utilService: UtilService,
     @Inject(LOCALE_ID) private locale: string
 
   ) {
@@ -31,15 +36,6 @@ export class FirebaseService {
     this.afAuth.auth.signOut();
   }
 
-
-  getRole(uid): Observable<{}[]> {
-    return this.afs.collection('users', ref => {
-      let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
-      query = query.where('uid', '==', uid)
-      return query;
-    }).valueChanges();
-  }
-
   isLogin() {
     return this.afAuth.authState.pipe(
       take(1),
@@ -51,22 +47,47 @@ export class FirebaseService {
     return this.afAuth.authState.pipe(
       mergeMap((user) => {
         return this.getRole(user.uid)
-      }),
+      })
+      ,
       map((user: any) => {
         return user[0].role == 'admin';
       })
     )
   }
 
+  getRole(uid): Observable<{}[]> {
+    return this.afs.collection('users', ref => {
+      let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+      query = query.where('uid', '==', uid)
+      return query;
+    }).valueChanges();
+  }
+
   getUserState() {
     return this.afAuth.authState;
+  }
+
+  getUserInfo() {
+    return this.afAuth.authState.pipe(
+      mergeMap((user) => {
+        return this.getRole(user.uid)
+      })
+    )
+  }
+
+  getResetFeedbackFormNotice() {
+    return this.resetFeedbackFormSubject$.asObservable();
+  }
+
+  sendResetFeedbackFormNotice() {
+    this.resetFeedbackFormSubject$.next('reset');
   }
 
   postFeedback(issue) {
     return this.afs.collection('issues').get().pipe(
       mergeMap((collection) => {
         issue.id = formatDate(issue.createTime, 'yyyyMMdd', this.locale) + this.padLeft((collection.size + 1), 4);
-        return this.afs.collection('issues').doc(issue.id).set(issue)
+        return this.afs.collection('issues').doc(issue.id).set(issue);
       })
     );
   }
@@ -78,38 +99,45 @@ export class FirebaseService {
       return this.padLeft("0" + str, length);
   }
 
-  getTotal() {
+  getIssues(queryStatus) {
     this.issuePageIdList = [];
     return this.afs.collection('issues', ref => {
-      return ref;
+      let queryRef;
+      if (queryStatus !== -1) {
+        queryRef = ref.where('status', '==', queryStatus)
+      } else {
+        queryRef = ref.where('status', '<', 99);
+      };
+      return queryRef;
     }).valueChanges().pipe(
       map((v) => {
-        let obj = {
-          total: v.length
-        };
-        v.map((v: any, index) => {
-          if ((index % 10) == 0) {
-            this.issuePageIdList.push(v.id);
-          };
+        v.sort((a: any, b: any) => {
+          return a.id > b.id ? 1 : -1;
         });
+        v.map((item) => {
+          return this.utilService.transformTimestampToDate(item, 'createTime');
+        });
+        let obj = {
+          total: v.length,
+          pages: []
+        };
+        for (var i = 0, len = v.length; i < len; i += 10) {
+          obj.pages.push(v.slice(i, i + 10));
+        };
         return obj
       })
     );
   }
 
-  getIssues(page): Observable<{}[]> {
-    return this.afs.collection('issues',
-      ref => {
-        let startId = this.issuePageIdList[page - 1];
-        return ref.orderBy('id').startAt(startId).limit(10)
-      }).valueChanges();
-  }
-
   getIssue(id): Observable<{}[]> {
     return this.afs.collection('issues',
       ref => {
-        return ref.where('id','==',id)
+        return ref.where('id', '==', id)
       }).valueChanges();
+  }
+
+  updateIssue(issue) {
+    return this.afs.collection('issues').doc(issue.id).update(issue);
   }
 
 }

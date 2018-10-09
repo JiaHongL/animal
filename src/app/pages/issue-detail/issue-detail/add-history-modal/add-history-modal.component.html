@@ -1,3 +1,38 @@
-<p>
-  add-history-modal works!
-</p>
+<div class="modal-wrapper add-history" [class.hide-modal]="!isOpen.status" (click)="overModal($event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="title">
+        <span>增加歷程{{model.isOpen}}</span>
+      </div>
+      <div class="close">
+        <a href="javascript:void(0)">
+          <i class="fas fa-times fa-lg font-grey-mint" (click)="closeModal()"></i>
+        </a>
+      </div>
+    </div>
+    <div class="modal-content">
+      <form class="pure-form pure-form-stacked" [formGroup]="form">
+        <fieldset class="no-padding">
+          <label for="name">狀態</label>
+          <div class="pure-control-group">
+            <select class="pure-input-1" formControlName="status">
+              <option *ngFor="let item of codeList.IssuesStatusList" [hidden]="item.key==0" [value]="item.key">{{item.value}}</option>
+            </select>
+          </div>
+          <label for="name">備註</label>
+          <div class="pure-group">
+            <textarea class="pure-textarea h-min-200" placeholder="請填寫備註" [ngClass]="{'has-error': form.controls.remark.touched && form.controls.remark.invalid}" formControlName="remark"></textarea>
+          </div>
+        </fieldset>
+        <div class="reset">
+          <a href="javascript:void(0)" class="title" (click)="form.reset()">重新設定</a>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="pure-button button-small button-search m-r-t" (click)="addHistory()" [disabled]="form.invalid">
+        送出
+      </button>
+    </div>
+  </div>
+</div>

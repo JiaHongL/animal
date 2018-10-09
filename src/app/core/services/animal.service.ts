@@ -17,7 +17,6 @@ const httpOptions = {
 })
 export class AnimalService {
   favoriteChangeSubject$ = new Subject();
-  searchNoticeSubject$ = new Subject();
 
   constructor(
     private http: HttpClient,
@@ -85,10 +84,6 @@ export class AnimalService {
 
   getFavoriteChange() {
     return this.favoriteChangeSubject$.asObservable();
-  }
-
-  getSearchNotice() {
-    return this.searchNoticeSubject$.asObservable();
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

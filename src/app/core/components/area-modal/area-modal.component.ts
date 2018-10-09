@@ -12,7 +12,7 @@ export class AreaModalComponent implements AfterViewChecked {
   codeList = CodeList;
 
   _model = {
-    isOpen: true,
+    isOpen: false,
   };
 
   get model() {

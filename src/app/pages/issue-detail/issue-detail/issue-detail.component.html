@@ -4,10 +4,16 @@
       一、填單內容
     </div>
     <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">
-      標題
+      單號
     </div>
-    <div class="col-md-3-4 col-xs-3-4 padding-l-5 border-t-r line-height-28 text-truncate">
-      {{issue.title}}
+    <div class="col-md-1-4 col-xs-3-4 padding-l-5 border-t-r line-height-28 text-truncate">
+      {{issue.id}}
+    </div>
+    <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">
+      建立時間
+    </div>
+    <div class="col-md-1-4 col-xs-3-4 padding-l-5 border-t-r line-height-28">
+      {{issue.createTime | date: 'yyyy/MM/dd HH:ss'}}
     </div>
     <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">
       類別
@@ -28,19 +34,16 @@
       {{issue.createUser}}
     </div>
     <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">
-      建立時間
-    </div>
-    <div class="col-md-1-4 col-xs-3-4 padding-l-5 border-t-r line-height-28">
-      {{issue.createTime | date: 'yyyy/MM/dd HH:ss'}}
-    </div>
-    <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">
       連絡信箱
     </div>
-    <div class="col-md-3-4 col-xs-3-4 padding-l-5 border-t-r line-height-28 text-truncate">
+    <div class="col-md-1-4 col-xs-3-4 padding-l-5 border-t-r line-height-28 text-truncate">
       {{issue.email}}
     </div>
-    <div class="col-md-4-4 col-xs-4-4 padding-l-5 border-t-r line-height-28">
-      內容
+    <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">
+      標題
+    </div>
+    <div class="col-md-3-4 col-xs-3-4 padding-l-5 border-t-r line-height-28 text-truncate">
+      {{issue.title}}
     </div>
     <div class="col-md-4-4 col-xs-4-4 row-md-5 row-xs-4 padding-l-5 border-t-r line-height-28">
       {{issue.comment}}
@@ -55,7 +58,7 @@
       備註
     </div>
     <div class="col-md-1-4 col-xs-4-4 hidden-xs text-center padding-l-5 border-t-r line-height-28">
-      建立者
+      填寫人
     </div>
     <div class="col-md-1-4 col-xs-4-4 hidden-xs text-center padding-l-5 border-t-r line-height-28">
       建立時間
@@ -80,13 +83,14 @@
         </a>
       </div>
     </ng-container>
+    <button class="add-history-btn" [hidden]="issue.status=='99'" (click)="openModal()">
+      <a href="javascript:void(0)">
+          <i class="fas fa-pen"></i>
+      </a>
+    </button>
   </div>
 </div>
 
-<a href="javascript:void(0)" class="add-history-btn">
-    <i class="fas fa-pen"></i>
-</a>
 
 <ng-template dynamic-Loading></ng-template>
-
-<!-- <app-add-history-modal></app-add-history-modal> -->
+<app-add-history-modal [model]="addHistoryModel" [isOpen]="isOpen"></app-add-history-modal>

@@ -343,13 +343,13 @@ const ShelterList = [
 // 11.feedback 類型
 const FeedbackTypeList = [
     {
-        key: '1',
+        key: 1,
         value: '使用回饋'
     }, {
-        key: '2',
+        key: 2,
         value: '建議事項'
     }, {
-        key: '3',
+        key: 3,
         value: '其它'
     }
 ];
@@ -357,19 +357,19 @@ const FeedbackTypeList = [
 // 11.IssuesStatusList
 const IssuesStatusList = [
     {
-        key: '0',
+        key: 0,
         value: '提交'
     }, {
-        key: '1',
+        key: 1,
         value: '追蹤中'
     }, {
-        key: '2',
-        value: '待解決'
+        key: 2,
+        value: '處理中'
     }, {
-        key: '3',
-        value: '已處理'
+        key: 3,
+        value: '已解決'
     }, {
-        key: '99',
+        key: 99,
         value: '歸檔'
     }
 ];

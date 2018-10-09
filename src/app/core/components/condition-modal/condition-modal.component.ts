@@ -15,7 +15,7 @@ export class ConditionModalComponent implements OnInit, AfterViewInit {
   form: FormGroup;
 
   _model = {
-    isOpen: true,
+    isOpen: false,
   };
 
   get model() {
@@ -79,4 +79,5 @@ export class ConditionModalComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.form.reset();
   }
+  
 }

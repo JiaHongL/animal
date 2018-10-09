@@ -1,32 +1,47 @@
 <div class="wrapper">
   <div class="issues-grid">
     <div class="title">
-        <legend>
-          <h1 class="no-margin">待處理列表</h1>
-        </legend>
+      <legend>
+        <h1 class="no-margin">待處理列表</h1>
+      </legend>
+    </div>
+    <div class="button-group">
+      <div class="pure-button-group" role="group" aria-label="...">
+        <button class="pure-button button-secondary button-xsmall" [ngClass]="{'pure-button-active': queryStatus==-1}"
+          (click)="setQueryStatus(-1)">全部</button>
+        <button class="pure-button button-secondary button-xsmall" [ngClass]="{'pure-button-active': queryStatus==0}"
+          (click)="setQueryStatus(0)">提交</button>
+        <button class="pure-button button-secondary button-xsmall" [ngClass]="{'pure-button-active': queryStatus==1}"
+          (click)="setQueryStatus(1)">追蹤中</button>
+        <button class="pure-button button-secondary button-xsmall" [ngClass]="{'pure-button-active': queryStatus==2}"
+          (click)="setQueryStatus(2)">處理中</button>
+        <button class="pure-button button-secondary button-xsmall" [ngClass]="{'pure-button-active': queryStatus==3}"
+          (click)="setQueryStatus(3)">已解決</button>
+      </div>
     </div>
     <div class="table">
       <table class="pure-table pure-table-striped issues-table">
         <thead class="thead">
           <tr>
             <th>#</th>
-            <th>狀態</th>
-            <th>類別</th>
+            <th class="hidden-xs">狀態</th>
+            <th class="hidden-xs">類別</th>
             <th>單號</th>
             <th>標題</th>
-            <th>填寫人</th>
-            <th>建立時間</th>
+            <th class="hidden-xs">填寫人</th>
+            <th class="hidden-xs">建立時間</th>
           </tr>
         </thead>
         <tbody class="tbody">
-          <tr [ngClass]="{'tr-odd': odd}" *ngFor="let item of issues$ | async ; let index=index; let odd=odd;" (click)="openIssue(item.id)">
+          <tr [ngClass]="{'tr-odd': odd}" *ngFor="let item of pages[currentPage-1] ; let index=index; let odd=odd;"
+            (click)="openIssue(item.id)">
             <th>{{index+1}}</th>
-            <th>{{item.status | issues:'status'}}</th>
-            <th>{{item.type | issues:'type'}}</th>
+            <th class="hidden-xs">{{item.status | issues:'status'}}</th>
+            <th class="hidden-xs">{{item.type | issues:'type'}}</th>
             <th>{{item.id}}</th>
             <th>{{item.title}}</th>
-            <th>{{item.createUser}}</th>
-            <th>{{item.createTime | date: 'yyyy/MM/dd HH:ss'}}</th>
+            <th class="hidden-xs">{{item.createUser}}</th>
+            <th class="hidden-xs">{{item.createTime | date: 'yyyy/MM/dd HH:ss'}}</th>
           </tr>
         </tbody>
       </table>

@@ -1,15 +1,18 @@
+export class history {       
+    status:number 
+    createTime: Date;
+    createUser: string;
+    remark: string;
+}
+
+
 export class Issue {
-    status:string;
-    type: string;
-    title:string;
-    createTime:string;
-    createUser:string;
-    content:string;
-    comment:string;
-    history:[{
-        status:string
-        createTime:string;
-        createUser:string;
-        remark:string;
-    }]
+    status: number;
+    type: number;
+    title: string;
+    createTime: string;
+    createUser: string;
+    content: string;
+    comment: string;
+    history: history[]
 }
