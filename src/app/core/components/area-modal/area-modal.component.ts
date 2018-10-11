@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, AfterViewChecked, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { CodeList } from '../../../models/code-list';
 import { Router } from '@angular/router';
 import { UtilService } from '../../services/util.service';
@@ -30,7 +30,8 @@ export class AreaModalComponent implements AfterViewChecked {
   constructor(
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
-    private utilService: UtilService
+    private utilService: UtilService,
+    private elementRef:ElementRef
   ) {
   }
 
@@ -42,7 +43,7 @@ export class AreaModalComponent implements AfterViewChecked {
   }
 
   overModal(event) {
-    if ((document.getElementsByClassName('modal-wrapper area')[0] === (event.target))) {
+    if ((this.elementRef.nativeElement.children[0] === (event.target))) {
       this.model.isOpen = false;
     }
   }
@@ -56,7 +57,7 @@ export class AreaModalComponent implements AfterViewChecked {
   }
 
   ngAfterViewChecked() {
-    document.querySelectorAll('.area .modal-content')[0].scrollTop = 0;
+    this.elementRef.nativeElement.querySelector('.modal-content').scrollTop = 0;
   }
 
 }

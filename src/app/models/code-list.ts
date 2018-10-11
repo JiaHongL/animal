@@ -230,10 +230,6 @@ const ColourList = [
         value: '三花色'
     },
     {
-        key: '三花色',
-        value: '三花色'
-    },
-    {
         key: '虎斑白色',
         value: '虎斑白色'
     }, {

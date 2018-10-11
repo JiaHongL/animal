@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { PhotoModel } from './photo.interface';
 
 @Component({
@@ -17,11 +17,13 @@ export class PhotoModalComponent implements OnInit {
     return this._model;
   }
   @Input()
-  set model(model:PhotoModel) {
+  set model(model: PhotoModel) {
     this._model = model;
   }
 
-  constructor() { }
+  constructor(
+    private elementRef: ElementRef
+  ) { }
 
   closeModal() {
     this.model.isOpen = false;
@@ -29,7 +31,7 @@ export class PhotoModalComponent implements OnInit {
   }
 
   overModal(event) {
-    if ((document.getElementsByClassName('modal-wrapper photo')[0] === (event.target))) {
+    if ((this.elementRef.nativeElement.children[0] === (event.target))) {
       this.model.isOpen = false;
       this.model.url = '';
     }

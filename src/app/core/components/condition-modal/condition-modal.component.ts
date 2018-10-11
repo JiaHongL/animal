@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, NgZone, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, NgZone, AfterViewInit, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CodeList } from '../../../models/code-list';
 import { Router } from '@angular/router';
@@ -34,6 +34,7 @@ export class ConditionModalComponent implements OnInit, AfterViewInit {
     private router: Router,
     private ngZone: NgZone,
     private utilService:UtilService,
+    private elementRef:ElementRef
   ) {
     this.form = this.fb.group({
       animal_kind: ['', ''],
@@ -54,7 +55,7 @@ export class ConditionModalComponent implements OnInit, AfterViewInit {
   }
 
   overModal(event) {
-    if ((document.getElementsByClassName('modal-wrapper condition')[0] === (event.target))) {
+    if ((this.elementRef.nativeElement.children[0] === (event.target))) {
       this.model.isOpen = false;
     }
   }

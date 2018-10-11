@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-remark-modal',
@@ -20,7 +20,9 @@ export class RemarkModalComponent implements OnInit {
     this._model = model;
   }
 
-  constructor() { }
+  constructor(
+    private elementRef:ElementRef
+  ) { }
 
   closeModal() {
     this.model.isOpen = false;
@@ -28,7 +30,7 @@ export class RemarkModalComponent implements OnInit {
   }
 
   overModal(event) {
-    if ((document.getElementsByClassName('modal-wrapper remark')[0] === (event.target))) {
+    if ((this.elementRef.nativeElement.children[0] === (event.target))) {
       this.model.isOpen = false;
       this.model.remark = '';
     }

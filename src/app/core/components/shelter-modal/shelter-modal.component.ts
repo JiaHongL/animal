@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewChecked } from '@angular/core';
+import { Component, Input, AfterViewChecked, ElementRef } from '@angular/core';
 import { CodeList } from '../../../models/code-list';
 import { Router } from '@angular/router';
 import { UtilService } from '../../services/util.service';
@@ -27,7 +27,8 @@ export class ShelterModalComponent implements AfterViewChecked {
 
   constructor(
     private router: Router,
-    private utilService:UtilService
+    private utilService:UtilService,
+    private elementRef:ElementRef
   ) { 
   }
 
@@ -39,7 +40,7 @@ export class ShelterModalComponent implements AfterViewChecked {
   }
 
   overModal(event) {
-    if ((document.getElementsByClassName('modal-wrapper shelter')[0] === (event.target))) {
+    if ((this.elementRef.nativeElement.children[0] === (event.target))) {
       this.model.isOpen = false;
     }
   }
@@ -53,7 +54,7 @@ export class ShelterModalComponent implements AfterViewChecked {
   }
 
   ngAfterViewChecked(){
-    document.querySelectorAll('.shelter .modal-content')[0].scrollTop = 0;
+    this.elementRef.nativeElement.querySelector('.modal-content').scrollTop = 0;
   }
 
 }

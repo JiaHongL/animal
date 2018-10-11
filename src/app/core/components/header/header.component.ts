@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ChangeDetectorRef, Input } from '@angular/core';
+import {ElementRef, Component,  OnInit,  ChangeDetectorRef,  Input} from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { UtilService } from '../../services/util.service';
 
@@ -48,13 +48,14 @@ export class HeaderComponent implements OnInit {
     private eRef: ElementRef,
     public changeDetectorRef: ChangeDetectorRef,
     public firebaseService: FirebaseService,
-    private utilService:UtilService
+    private utilService:UtilService,
+    private elementRef:ElementRef
   ) { 
 
   }
 
   onClick(event) {
-    if (document.getElementsByClassName('nav')[0].contains(event.target) === false) {
+    if (this.elementRef.nativeElement.querySelector('.nav').contains(event.target) === false) {
       this.isOpenMenu = false;
     };
   }

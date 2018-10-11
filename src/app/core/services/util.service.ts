@@ -1,24 +1,28 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, Renderer2, RendererFactory2 } from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilService {
-  bodyEl = document.body
+  private renderer: Renderer2;
   top = 0
 
-  constructor() {
-
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    rendererFactory: RendererFactory2
+  ) {
+    this.renderer = rendererFactory.createRenderer(null, null);
   }
 
   stopBodyScroll(isLock) {
     if (isLock) {
       this.top = window.scrollY
-      this.bodyEl.style.position = 'fixed'
-      this.bodyEl.style.top = - this.top + 'px'
+      this.renderer.setStyle(this.document.body, 'position', 'fixed');
+      this.renderer.setStyle(this.document.body, 'top',  - this.top + 'px');
     } else {
-      this.bodyEl.style.position = ''
-      this.bodyEl.style.top = ''
+      this.renderer.setStyle(this.document.body, 'position', '');
+      this.renderer.setStyle(this.document.body, 'top', '');
       window.scrollTo(0, this.top);
     };
   }
@@ -30,7 +34,7 @@ export class UtilService {
   isIosNoTouch() {
     let ua = navigator.userAgent.toLowerCase();
     if (/iphone|ipad|ipod/.test(ua)) {
-      Array.from(document.querySelectorAll('.no-touch')).forEach((element) => {
+      Array.from(this.document.querySelectorAll('.no-touch')).forEach((element) => {
         element.classList.remove('no-touch');
       });
     };

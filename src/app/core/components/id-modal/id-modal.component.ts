@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, NgZone } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, NgZone, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UtilService } from '../../services/util.service';
@@ -32,6 +32,7 @@ export class IdModalComponent implements OnInit, AfterViewInit {
     private router: Router,
     private ngZone: NgZone,
     private utilService:UtilService,
+    private elementRef:ElementRef
   ) {
     this.form = this.fb.group({
       animal_id: ['', ''],
@@ -57,7 +58,7 @@ export class IdModalComponent implements OnInit, AfterViewInit {
   }
 
   overModal(event) {
-    if ((document.getElementsByClassName('modal-wrapper id')[0] === (event.target))) {
+    if ((this.elementRef.nativeElement.children[0] === (event.target))) {
       this.model.isOpen = false;
     }
   }
