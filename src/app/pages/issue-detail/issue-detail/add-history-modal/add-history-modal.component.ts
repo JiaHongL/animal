@@ -45,6 +45,9 @@ export class AddHistoryModalComponent implements OnInit {
         status: 1,
         remark: ''
       });
+      if (this.utilService.isMobile()) {
+        this.utilService.stopBodyScroll(true);
+      };
     };
   }
 

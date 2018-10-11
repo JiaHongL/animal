@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { CodeList } from '../../../models/code-list';
 import { Router } from '@angular/router';
 import { UtilService } from '../../services/util.service';
+
 
 @Component({
   selector: 'app-area-modal',

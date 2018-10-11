@@ -25,12 +25,17 @@ export class FooterComponent implements OnInit {
   setSearchBreadcrumb(route) {
     let queryParams = route.snapshot.queryParams;
     let breadcrumb = [];
-    this.searchBreadcrumb = '';
     if (Object.keys(queryParams).length > 0) {
       Object.keys(queryParams).forEach((objectKey, index) => {
         let type = objectKey;
         let value = queryParams[objectKey];
         switch (type) {
+          case 'animal_id':
+            breadcrumb.push(value);
+            break;
+          case 'animal_subid':
+            breadcrumb.push(value);
+            break;
           case 'animal_kind':
             breadcrumb.push(value);
             break;
@@ -41,7 +46,6 @@ export class FooterComponent implements OnInit {
             breadcrumb.push(this.filterList('BodyTypeList', value));
             break;
           case 'animal_age':
-
             breadcrumb.push(this.filterList('AgeList', value));
             break;
           case 'animal_colour':
@@ -68,6 +72,12 @@ export class FooterComponent implements OnInit {
     }
   }
 
+  setIdBreadcrumb(route) {
+    if (route.snapshot.params.id) {
+      this.searchBreadcrumb = route.snapshot.params.id;
+    }
+  }
+
   filterList(ListName, originalData) {
     let filterData = CodeList[ListName].filter(v => v.key == originalData);
     let transformData = filterData.length > 0 ? filterData[0].value : originalData;
@@ -85,6 +95,7 @@ export class FooterComponent implements OnInit {
         }),
         filter((route) => route.outlet === 'primary'),
         tap((v) => this.setSearchBreadcrumb(v)),
+        tap((v) => this.setIdBreadcrumb(v)),
         mergeMap((route) => route.data),
       )
       .subscribe((event) => this.pageTitle = event.title);

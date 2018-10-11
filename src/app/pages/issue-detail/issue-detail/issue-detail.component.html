@@ -69,7 +69,7 @@
       </div>
       <div class="col-md-1-4 col-xs-2-4 icon hidden-xs text-center padding-l-5 padding-r-25 border-t-r line-height-28 text-truncate">
         {{history.remark}}
-        <a href="javascript:void(0)">
+        <a href="javascript:void(0)" (click)="openRemarkModal(history.remark)">
           <i class="fa fa-book" aria-hidden="true"></i>
         </a>
       </div>
@@ -78,7 +78,7 @@
       </div>
       <div class="col-md-1-4 col-xs-2-4 icon text-center padding-l-5 border-t-r line-height-28">
         {{history.createTime | date: 'yyyy/MM/dd HH:ss'}}
-        <a class="visible-xs-inline" href="javascript:void(0)">
+        <a class="visible-xs-inline" href="javascript:void(0)" (click)="openRemarkModal(history.remark)">
           <i class="fa fa-book"></i>
         </a>
       </div>
@@ -94,3 +94,4 @@
 
 <ng-template dynamic-Loading></ng-template>
 <app-add-history-modal [model]="addHistoryModel" [isOpen]="isOpen"></app-add-history-modal>
+<app-remark-modal [model]="remarkModel"></app-remark-modal>

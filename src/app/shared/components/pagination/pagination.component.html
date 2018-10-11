@@ -1,15 +1,15 @@
 <div class="pagination" *ngIf="totalItems>0">
   <button class="page-item" (click)="decrementCurrentPage(5)">
-    <a>&laquo;</a>
+    <a  href="javscript:void(0);">&laquo;</a>
   </button>
   <a class="page-item" *ngIf="currentPage!==1 && pages.length>5" href="javscript:void(0);"  (click)="decrementCurrentPage(3)">...</a>
   <ng-container *ngFor="let item of pages">
-    <a class="page-item" [ngClass]="{'active': currentPage == item.value}" *ngIf="canShowPage(item.value)" (click)="setCurrentPage(item.value)" href="javscript:void(0);">
+    <a class="page-item"  href="javscript:void(0);" [ngClass]="{'active': currentPage == item.value}" *ngIf="canShowPage(item.value)" (click)="setCurrentPage(item.value)" href="javscript:void(0);">
       <span >{{item.value}}</span>
     </a>
   </ng-container>
   <a class="page-item" href="javscript:void(0);" *ngIf="!(currentPage==pages.length) && pages.length>5" (click)="incrementCurrentPage(3)">...</a>
   <button class="page-item" [disabled]="currentPage==pages.length"  (click)="incrementCurrentPage(5)">
-    <a>&raquo;</a>
+    <a href="javscript:void(0);">&raquo;</a>
   </button>
 </div>

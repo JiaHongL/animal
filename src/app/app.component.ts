@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnInit, NgZone } from '@angular/core';
+import { Component, AfterViewInit, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { filter } from 'rxjs/internal/operators/filter';
@@ -14,6 +14,8 @@ import { FirebaseService } from './core/services/firebase.service';
 export class AppComponent implements AfterViewInit, OnInit {
   isUserLogin = false;
   isOpenMenu = false;
+
+  userName = '';
 
   constructor(
     private router: Router,
@@ -34,6 +36,13 @@ export class AppComponent implements AfterViewInit, OnInit {
   isLogin() {
     this.firebaseService.isLogin().subscribe(isLogin => {
       this.isUserLogin = isLogin;
+      if (this.isUserLogin) {
+        this.firebaseService.getUserInfo().subscribe((user: any) => {
+          this.userName = user[0].name;
+        },(error)=>{
+          this.router.navigate(['/backend/login'])
+        });
+      }
     });
   }
 

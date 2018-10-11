@@ -2,7 +2,7 @@
   <div class="modal">
     <div class="modal-header">
       <div class="title">
-        <span>增加歷程{{model.isOpen}}</span>
+        <span>增加歷程</span>
       </div>
       <div class="close">
         <a href="javascript:void(0)">
@@ -24,9 +24,6 @@
             <textarea class="pure-textarea h-min-200" placeholder="請填寫備註" [ngClass]="{'has-error': form.controls.remark.touched && form.controls.remark.invalid}" formControlName="remark"></textarea>
           </div>
         </fieldset>
-        <div class="reset">
-          <a href="javascript:void(0)" class="title" (click)="form.reset()">重新設定</a>
-        </div>
       </form>
     </div>
     <div class="modal-footer">

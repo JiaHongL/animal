@@ -1,3 +1,4 @@
+import { history, Issue } from './../../models/issues';
 import { Injectable, Inject, LOCALE_ID } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -133,7 +134,14 @@ export class FirebaseService {
     return this.afs.collection('issues',
       ref => {
         return ref.where('id', '==', id)
-      }).valueChanges();
+      }).valueChanges().pipe(
+        map((v:Issue[]) => {
+          v[0].history.sort((a: any, b: any) => {
+            return b.createTime > a.createTime ? 1 : -1;
+          });
+          return v
+        })
+      );
   }
 
   updateIssue(issue) {

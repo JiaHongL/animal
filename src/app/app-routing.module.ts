@@ -41,6 +41,11 @@ const routes: Routes = [
     loadChildren: 'src/app/pages/issues/issues.module#IssuesModule',
     data: { title: '意見處理' },
     canActivate:[AuthGuardGuard]
+  },{
+    path:'backend/archive',
+    loadChildren: 'src/app/pages/archive/archive.module#ArchiveModule',
+    data: { title: '歸檔列表' },
+    canActivate:[AuthGuardGuard]
   },
   {
     path:'backend/issue',

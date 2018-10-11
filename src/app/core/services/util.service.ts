@@ -11,16 +11,16 @@ export class UtilService {
 
   }
 
-  stopBodyScroll(isFixed) {
-    if (isFixed) {
+  stopBodyScroll(isLock) {
+    if (isLock) {
       this.top = window.scrollY
       this.bodyEl.style.position = 'fixed'
       this.bodyEl.style.top = - this.top + 'px'
     } else {
       this.bodyEl.style.position = ''
       this.bodyEl.style.top = ''
-      window.scrollTo(0, this.top) // 回到原先的top
-    }
+      window.scrollTo(0, this.top);
+    };
   }
 
   isMobile() {

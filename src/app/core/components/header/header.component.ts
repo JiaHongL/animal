@@ -14,12 +14,21 @@ import { UtilService } from '../../services/util.service';
 export class HeaderComponent implements OnInit {
   _isLogin = false;
 
+  _userName = '';
+
   get isLogin() {
     return this._isLogin;
   }
   @Input()
   set isLogin(isLogin) {
     this._isLogin = isLogin;
+  }
+  get userName() {
+    return this._userName;
+  }
+  @Input('name')
+  set userName(name) {
+    this._userName = name;
   }
   conditionModel = {
     isOpen: false
@@ -29,6 +38,9 @@ export class HeaderComponent implements OnInit {
   }
   shelterModel = {
     isOpen: false
+  }
+  idModel = {
+    isOpen:false
   }
   isOpenMenu = false;
 
@@ -55,7 +67,7 @@ export class HeaderComponent implements OnInit {
     this.isOpenMenu = false;
   }
 
-  openModel(name) {
+  openModal(name) {
     this[name].isOpen = true;
     this[name] = { ...this[name] };
   }

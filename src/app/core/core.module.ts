@@ -13,6 +13,7 @@ import { ShelterModalComponent } from './components/shelter-modal/shelter-modal.
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UtilService } from './services/util.service';
 import { FirebaseService } from './services/firebase.service';
+import { IdModalComponent } from './components/id-modal/id-modal.component';
 
 @NgModule({
   imports: [
@@ -21,8 +22,8 @@ import { FirebaseService } from './services/firebase.service';
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [HeaderComponent, FooterComponent, ConditionModalComponent, AreaModalComponent, ShelterModalComponent],
-  exports: [HeaderComponent, FooterComponent, ConditionModalComponent],
+  declarations: [HeaderComponent, FooterComponent, ConditionModalComponent, AreaModalComponent, ShelterModalComponent, IdModalComponent],
+  exports: [HeaderComponent, FooterComponent],
   providers: [AnimalService, UtilService, FirebaseService]
 })
 export class CoreModule {

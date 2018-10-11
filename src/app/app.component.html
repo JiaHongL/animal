@@ -1,6 +1,6 @@
 <div class="container">
   <!-- header -->
-  <app-header [isLogin]="isUserLogin"></app-header>
+  <app-header [isLogin]="isUserLogin" [name]="userName"></app-header>
   <!-- main -->
   <div class="main p-t-20 p-b-100">
     <router-outlet (activate)="goTop();isLogin();"></router-outlet>

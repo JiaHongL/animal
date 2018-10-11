@@ -34,7 +34,6 @@ export class IssuesComponent implements OnInit {
     this.firebaseService.getIssues(this.queryStatus).subscribe((v) => {
       this.totalItems = v.total;
       this.pages = v.pages;
-      console.log(v);
     });
 
   }

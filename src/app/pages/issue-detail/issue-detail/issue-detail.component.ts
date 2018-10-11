@@ -30,6 +30,11 @@ export class IssueDetailComponent implements OnInit {
     issue: {}
   }
 
+  remarkModel = {
+    isOpen: false,
+    remark: ''
+  }
+
   isOpen = {
     status: false
   };
@@ -67,6 +72,10 @@ export class IssueDetailComponent implements OnInit {
 
   openModal() {
     this.isOpen = { ...this.isOpen, ...{ status: true } };
+  }
+
+  openRemarkModal(remark) {
+    this.remarkModel = { ...this.remarkModel, ...{ isOpen: true, remark: remark } };
   }
 
   ngOnInit() {

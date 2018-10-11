@@ -361,7 +361,7 @@ const IssuesStatusList = [
         value: '提交'
     }, {
         key: 1,
-        value: '追蹤中'
+        value: '已追蹤'
     }, {
         key: 2,
         value: '處理中'

@@ -30,25 +30,25 @@
               <span class="item-title">我的最愛</span>
             </a>
           </div>
-          <div class="list-item" (click)="closeMenu();openModel('conditionModel');">
+          <div class="list-item" (click)="closeMenu();openModal('conditionModel');">
             <a href="javascript:void(0)">
               <i class="fas fa-clipboard-list fa-lg item-icon" style="padding-left:17px;padding-right:23px;"></i>
               <span class="item-title">條件收尋</span>
             </a>
           </div>
-          <!-- <div class="list-item" (click)="closeMenu();openModel('conditionModel');">
+          <div class="list-item" (click)="closeMenu();openModal('idModel');">
             <a href="javascript:void(0)">
               <i class="fas fa-file-alt fa-lg item-icon" style="padding-left:17px;padding-right:23px;"></i>
               <span class="item-title">編號收尋</span>
             </a>
-          </div> -->
-          <div class="list-item" (click)="closeMenu();openModel('areaModel');">
+          </div>
+          <div class="list-item" (click)="closeMenu();openModal('areaModel');">
             <a href="javascript:void(0)">
               <i class="fas fa-map-signs fa-lg item-icon"></i>
               <span class="item-title">地區收尋</span>
             </a>
           </div>
-          <div class="list-item" (click)="closeMenu();openModel('shelterModel');">
+          <div class="list-item" (click)="closeMenu();openModal('shelterModel');">
             <a href="javascript:void(0)">
               <i class="fas fa-hands-helping fa-lg item-icon p-r-15"></i>
               <span class="item-title">收容中心收尋</span>
@@ -68,13 +68,19 @@
           </div>
         </div>
         <div *ngIf="isLogin">
+          <div class="list-item" (click)="closeMenu()">
+            <a href="javascript:void(0)">
+              <i class="far fa-user-circle  fa-lg item-icon"></i>
+              <span class="item-title">{{userName}}</span>
+            </a>
+          </div>
           <div class="list-item" [routerLink]="['/backend/issues']" (click)="closeMenu()">
             <a href="javascript:void(0)">
               <i class="far fa-list-alt fa-lg item-icon"></i>
               <span class="item-title">待處理</span>
             </a>
           </div>
-          <div class="list-item" [routerLink]="['/backend/issues']" (click)="closeMenu()">
+          <div class="list-item" [routerLink]="['/backend/archive']" (click)="closeMenu()">
             <a href="javascript:void(0)">
               <i class="fas fa-clipboard-check fa-lg item-icon p-r-20"></i>
               <span class="item-title">已歸檔</span>
@@ -87,19 +93,6 @@
             </a>
           </div>
         </div>
-  
-        <!-- <div class="list-item" (click)="closeMenu()">
-          <a href="javascript:void(0)">
-            <i class="fas fa-envelope fa-lg item-icon"></i>
-            <span class="item-title">意見回饋</span>
-          </a>
-        </div>
-        <div class="list-item" (click)="closeMenu()">
-          <a href="javascript:void(0)">
-            <i class="fas fa-user-alt fa-lg item-icon"></i>
-            <span class="item-title">登入帳號</span>
-          </a>
-        </div> -->
       </div>
     </div>
   </div>
@@ -109,3 +102,4 @@
 <app-condition-modal [model]="conditionModel"></app-condition-modal>
 <app-area-modal [model]="areaModel"></app-area-modal>
 <app-shelter-modal [model]="shelterModel"></app-shelter-modal>
+<app-id-modal [model]="idModel"></app-id-modal>

@@ -42,11 +42,15 @@ export class FeedbackComponent implements OnInit {
     });
     this.feedbackForm.controls.createUser.valueChanges.subscribe((userName) => {
       let historyArray = this.feedbackForm.controls.history['controls'];
-      historyArray[0]['controls'].createUser.patchValue(userName);
+      historyArray[0].patchValue({
+        createUser: userName
+      });
     });
-    this.feedbackForm.controls.createTime.valueChanges.subscribe((userName) => {
+    this.feedbackForm.controls.createTime.valueChanges.subscribe((createTime) => {
       let historyArray = this.feedbackForm.controls.history['controls'];
-      historyArray[0]['controls'].createTime.patchValue(userName);
+      historyArray[0].patchValue({
+        createTime: createTime
+      });
     });
   }
 
