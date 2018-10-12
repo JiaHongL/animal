@@ -6,31 +6,7 @@
         </legend>
       </div>
       <div class="table">
-        <table class="pure-table pure-table-striped issues-table">
-          <thead class="thead">
-            <tr>
-              <th>#</th>
-              <th class="hidden-xs">狀態</th>
-              <th class="hidden-xs">類別</th>
-              <th>單號</th>
-              <th>標題</th>
-              <th class="hidden-xs">填寫人</th>
-              <th class="hidden-xs">建立時間</th>
-            </tr>
-          </thead>
-          <tbody class="tbody">
-            <tr [ngClass]="{'tr-odd': odd}" *ngFor="let item of pages[currentPage-1] ; let index=index; let odd=odd;"
-              (click)="openIssue(item.id)">
-              <th>{{index+1}}</th>
-              <th class="hidden-xs">{{item.status | issues:'status'}}</th>
-              <th class="hidden-xs">{{item.type | issues:'type'}}</th>
-              <th>{{item.id}}</th>
-              <th>{{item.title}}</th>
-              <th class="hidden-xs">{{item.createUser}}</th>
-              <th class="hidden-xs">{{item.createTime | date: 'yyyy/MM/dd HH:ss'}}</th>
-            </tr>
-          </tbody>
-        </table>
+        <app-issue-table [model]="pages[currentPage-1]"></app-issue-table>
       </div>
       <div class="pagination">
         <app-pagination [total-items]="totalItems" [items-per-page]="itemsPerPage" (set-page)="setCurrentPage($event)"></app-pagination>

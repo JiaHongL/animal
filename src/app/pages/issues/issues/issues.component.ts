@@ -19,8 +19,7 @@ export class IssuesComponent implements OnInit {
   issues$
 
   constructor(
-    public firebaseService: FirebaseService,
-    private utilService: UtilService
+    public firebaseService: FirebaseService
   ) {
   }
 
@@ -36,10 +35,6 @@ export class IssuesComponent implements OnInit {
       this.pages = v.pages;
     });
 
-  }
-
-  openIssue(id) {
-    window.open('#/backend/issue/' + id);
   }
 
   ngOnInit() {

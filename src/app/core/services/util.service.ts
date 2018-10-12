@@ -19,7 +19,7 @@ export class UtilService {
     if (isLock) {
       this.top = window.scrollY
       this.renderer.setStyle(this.document.body, 'position', 'fixed');
-      this.renderer.setStyle(this.document.body, 'top',  - this.top + 'px');
+      this.renderer.setStyle(this.document.body, 'top', - this.top + 'px');
     } else {
       this.renderer.setStyle(this.document.body, 'position', '');
       this.renderer.setStyle(this.document.body, 'top', '');
@@ -43,6 +43,13 @@ export class UtilService {
   transformTimestampToDate(item, name) {
     item[name] = item[name].toDate()
     return item;
+  }
+
+  preloadImg(images: string[]) {
+    images.forEach((src) => {
+      let img = new Image();
+      img.src = src;
+    });
   }
 
 }

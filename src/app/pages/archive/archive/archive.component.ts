@@ -19,17 +19,12 @@ export class ArchiveComponent implements OnInit {
   issues$
 
   constructor(
-    public firebaseService: FirebaseService,
-    private utilService: UtilService
+    public firebaseService: FirebaseService
   ) {
   }
 
   setCurrentPage(v) {
     this.currentPage = v;
-  }
-
-  openIssue(id) {
-    window.open('#/backend/issue/' + id);
   }
 
   ngOnInit() {

@@ -29,7 +29,7 @@ export class AdoptComponent implements OnInit {
   constructor(
     private animalService: AnimalService,
     private loadingService: LoadingService,
-    private activatedRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute
   ) {
 
   }

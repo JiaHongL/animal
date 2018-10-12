@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseService } from '../../../core/services/firebase.service';
 import { LoadingDirective } from '../../../feature/loading/loading.directive';
 import { LoadingService } from '../../../feature/loading/loading.service';
+import { UtilService } from '../../../core/services/util.service';
 
 @Component({
   selector: 'app-feedback',
@@ -20,7 +21,7 @@ export class FeedbackComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private firebaseService: FirebaseService,
-    private loadingService: LoadingService,
+    private loadingService: LoadingService
   ) {
     this.feedbackForm = this.fb.group({
       id: ['', ''],

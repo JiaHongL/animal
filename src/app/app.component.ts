@@ -6,6 +6,7 @@ import { map } from 'rxjs/internal/operators/map';
 import { mergeMap } from 'rxjs/internal/operators/mergeMap';
 import { FirebaseService } from './core/services/firebase.service';
 import { DOCUMENT } from "@angular/platform-browser";
+import { UtilService } from './core/services/util.service';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     private firebaseService: FirebaseService,
     private elementRef: ElementRef,
     private renderer: Renderer2,
+    private utilService: UtilService,
     @Inject(DOCUMENT) private document: Document
   ) {
 
@@ -83,7 +85,11 @@ export class AppComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-
+    this.utilService.preloadImg([
+      './assets/images/animal-koala-001.png',
+      './assets/images/person-family-001.png',
+      './assets/images/animal-cat-004.png'
+    ]);
   }
 
 }
