@@ -1,9 +1,9 @@
-import { history, Issue } from './../../models/issues';
+import { Issue } from './../../models/issues';
 import { Injectable, Inject, LOCALE_ID } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs/internal/Observable';
-import { take, map, mergeMap, tap } from 'rxjs/operators';
+import { take, map, mergeMap } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
 import { Subject } from 'rxjs';
 import { UtilService } from './util.service';
