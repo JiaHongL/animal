@@ -94,6 +94,7 @@ export class FooterComponent implements OnInit {
           return route;
         }),
         filter((route) => route.outlet === 'primary'),
+        tap(() => { this.searchBreadcrumb = '' }),
         tap((v) => this.setSearchBreadcrumb(v)),
         tap((v) => this.setIdBreadcrumb(v)),
         mergeMap((route) => route.data),
