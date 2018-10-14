@@ -6,7 +6,7 @@
         </legend>
       </div>
       <div class="table">
-        <app-issue-table [model]="pages[currentPage-1]"></app-issue-table>
+        <app-issue-table [model]="pages[currentPage-1]" [page]="currentPage"></app-issue-table>
       </div>
       <div class="pagination">
         <app-pagination [total-items]="totalItems" [items-per-page]="itemsPerPage" (set-page)="setCurrentPage($event)"></app-pagination>

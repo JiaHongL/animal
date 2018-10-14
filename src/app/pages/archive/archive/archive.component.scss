@@ -45,14 +45,14 @@
   @include media-breakpoint-only(md) {
     .issues-grid {
       width: 95%;
-      grid-template-rows: 50px 38px 1fr 50px;
+      grid-template-rows: 50px 1fr 50px;
     }
   }
 
   @include media-breakpoint-only(lg) {
     .issues-grid {
       width: 95%;
-      grid-template-rows: 50px 38px 1fr 50px;
+      grid-template-rows: 50px 1fr 50px;
 
       .button-group {
         text-align: left;
@@ -63,7 +63,7 @@
   @include media-breakpoint-only(sm) {
     .issues-grid {
       width: 95%;
-      grid-template-rows: 50px 38px 1fr 50px;
+      grid-template-rows: 50px 1fr 50px;
 
       .button-group {
         text-align: center;
@@ -74,7 +74,7 @@
   @include media-breakpoint-only(xs) {
     .issues-grid {
       width: 95%;
-      grid-template-rows: 50px 38px 1fr 50px;
+      grid-template-rows: 50px 1fr 50px;
 
       .button-group {
         text-align: center;

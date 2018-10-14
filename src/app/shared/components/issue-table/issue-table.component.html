@@ -11,9 +11,8 @@
     </tr>
   </thead>
   <tbody class="tbody">
-    <tr [ngClass]="{'tr-odd': odd}" *ngFor="let item of model ; let index=index; let odd=odd;"
-      (click)="openIssue(item.id)">
-      <th>{{index+1}}</th>
+    <tr [ngClass]="{'tr-odd': odd}" *ngFor="let item of model ; let index=index; let odd=odd;" (click)="openIssue(item.id)">
+      <th>{{index + 1 + (page-1) * 10 }}</th>
       <th class="hidden-xs">{{item.status | issues:'status'}}</th>
       <th class="hidden-xs">{{item.type | issues:'type'}}</th>
       <th>{{item.id}}</th>

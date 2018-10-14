@@ -9,6 +9,8 @@ export class IssueTableComponent implements OnInit {
 
   _model = [];
 
+  _page = 0;
+
   get model() {
     return this._model;
   }
@@ -17,7 +19,15 @@ export class IssueTableComponent implements OnInit {
     this._model = model;
   }
 
-  constructor() { 
+  get page() {
+    return this._page;
+  }
+  @Input()
+  set page(model) {
+    this._page = model;
+  }
+
+  constructor() {
 
   }
 
