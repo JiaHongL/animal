@@ -7,7 +7,7 @@ import { tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
   constructor(private firebaseService: FirebaseService, private router: Router) { }
   canActivate(
     next: ActivatedRouteSnapshot,

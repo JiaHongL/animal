@@ -11,7 +11,7 @@ import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AuthGuardGuard } from './auth-guard.guard';
+import { AuthGuard } from './auth.guard';
 import { AutoLoginGuard } from './auto-login.guard';
 
 @NgModule({
@@ -28,7 +28,7 @@ import { AutoLoginGuard } from './auto-login.guard';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule // imports firebase/storage only needed for storage features
   ],
-  providers: [AuthGuardGuard, AutoLoginGuard],
+  providers: [AuthGuard, AutoLoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

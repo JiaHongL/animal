@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuardGuard } from './auth-guard.guard';
+import { AuthGuard } from './auth.guard';
 import { AutoLoginGuard } from './auto-login.guard';
 
 const routes: Routes = [
@@ -40,18 +40,18 @@ const routes: Routes = [
     path:'backend/issues',
     loadChildren: 'src/app/pages/issues/issues.module#IssuesModule',
     data: { title: '意見處理' },
-    canActivate:[AuthGuardGuard]
+    canActivate:[AuthGuard]
   },{
     path:'backend/archive',
     loadChildren: 'src/app/pages/archive/archive.module#ArchiveModule',
     data: { title: '歸檔列表' },
-    canActivate:[AuthGuardGuard]
+    canActivate:[AuthGuard]
   },
   {
     path:'backend/issue',
     loadChildren: 'src/app/pages/issue-detail/issue-detail.module#IssueDetailModule',
     data: { title: '意見詳情' },
-    canActivate:[AuthGuardGuard]
+    canActivate:[AuthGuard]
   },
   {
     path: '**',
