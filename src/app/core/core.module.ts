@@ -14,6 +14,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UtilService } from './services/util.service';
 import { FirebaseService } from './services/firebase.service';
 import { IdModalComponent } from './components/id-modal/id-modal.component';
+import { GoTopComponent } from './components/go-top/go-top.component';
 
 @NgModule({
   imports: [
@@ -22,8 +23,8 @@ import { IdModalComponent } from './components/id-modal/id-modal.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [HeaderComponent, FooterComponent, ConditionModalComponent, AreaModalComponent, ShelterModalComponent, IdModalComponent],
-  exports: [HeaderComponent, FooterComponent],
+  declarations: [HeaderComponent, FooterComponent, ConditionModalComponent, AreaModalComponent, ShelterModalComponent, IdModalComponent, GoTopComponent],
+  exports: [HeaderComponent, FooterComponent,GoTopComponent],
   providers: [AnimalService, UtilService, FirebaseService]
 })
 export class CoreModule {

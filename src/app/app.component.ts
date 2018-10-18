@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnInit, NgZone, ChangeDetectorRef, ElementRef, HostListener, Inject, Renderer2 } from '@angular/core';
+import { Component, AfterViewInit, OnInit, HostListener, Inject, Renderer2 } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { filter } from 'rxjs/internal/operators/filter';
@@ -16,16 +16,14 @@ import { UtilService } from './core/services/util.service';
 export class AppComponent implements AfterViewInit, OnInit {
   isUserLogin = false;
   isOpenMenu = false;
-
   userName = '';
+  style = 'none';
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private titleService: Title,
     private firebaseService: FirebaseService,
-    private elementRef: ElementRef,
-    private renderer: Renderer2,
     private utilService: UtilService,
     @Inject(DOCUMENT) private document: Document
   ) {
@@ -34,27 +32,11 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   @HostListener("window:scroll", ['$event'])
   onWindowScroll(e: Event) {
-    let goTop = this.elementRef.nativeElement.querySelectorAll(".go-top");
-    if (goTop.length > 0) {
-      let display = this.document.documentElement.scrollTop >= 200 || this.document.body.scrollTop >= 200 ? 'block' : 'none'
-      this.renderer.setStyle(goTop[0], 'display', display);
-    }
-  }
-
-  goTop() {
-    let scrollStep = -window.scrollY / (300 / 15),
-      scrollInterval = setInterval(() => {
-        if (window.scrollY != 0) {
-          window.scrollBy(0, scrollStep);
-        }
-        else {
-          clearInterval(scrollInterval);
-        };
-      }, 15);
+    this.style = this.document.documentElement.scrollTop >= 600 || this.document.body.scrollTop >= 600 ? 'block' : 'none'
   }
 
   isLogin() {
-    document.body.scrollTop = 0;
+    this.document.body.scrollTop = 0;
     this.firebaseService.isLogin().subscribe(isLogin => {
       this.isUserLogin = isLogin;
       if (this.isUserLogin) {
