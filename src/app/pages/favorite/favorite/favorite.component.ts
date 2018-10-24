@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AnimalService } from '../../../core/services/animal.service';
 import { PhotoModel } from '../../../shared/components/photo-modal/photo.interface';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { PhotoModel } from '../../../shared/components/photo-modal/photo.interfa
   styleUrls: ['./favorite.component.scss']
 })
 export class FavoriteComponent implements OnInit, OnDestroy {
-  FavoriteChangeSubscription;
+  FavoriteChangeSubscription:Subscription;
   hasData = true;
   animalList = [];
 

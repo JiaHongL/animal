@@ -1,18 +1,19 @@
 import { CodeList } from '../../../models/code-list';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseService } from '../../../core/services/firebase.service';
 import { LoadingDirective } from '../../../feature/loading/loading.directive';
 import { LoadingService } from '../../../feature/loading/loading.service';
 import { UtilService } from '../../../core/services/util.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-feedback',
   templateUrl: './feedback.component.html',
   styleUrls: ['./feedback.component.scss']
 })
-export class FeedbackComponent implements OnInit {
-  resetNoticeSubscription;
+export class FeedbackComponent implements OnInit, OnDestroy {
+  resetNoticeSubscription: Subscription;
   isPost = false;
   codeList = CodeList;
   feedbackForm: FormGroup;
@@ -88,6 +89,10 @@ export class FeedbackComponent implements OnInit {
           }]
         });
       });
+  }
+
+  ngOnDestroy() {
+    this.resetNoticeSubscription.unsubscribe();
   }
 
 }

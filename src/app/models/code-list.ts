@@ -50,7 +50,7 @@ const BodyTypeList = [{
     value: '不拘'
 }];
 
-// 04.地區代碼表
+// 04.年紀代碼表
 const AgeList = [{
     key: 'CHILD',
     value: '幼年'
