@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     return this.firebaseService.isLogin().pipe(
       tap(isLogin => {
-        if (!isLogin) { this.router.navigate(['login']); }
+        if (!isLogin) { this.router.navigate(['backend/login']); }
       })
     );
   }
