@@ -20,13 +20,27 @@ export class Animal {
     animal_status: string; //動物狀態 [NONE | OPEN | ADOPTED | OTHER | DEAD] (未公告、開放認養、已認養、其他、死亡)
     animal_sterilization: string; // 是否絕育 [T | F | N](是、否、未輸入)
     animal_subid: string; //動物的區域編號
-    animal_title:string; //動物網頁標題(文字敘述)
-    animal_update:string; //動物資料異動時間
+    animal_title: string; //動物網頁標題(文字敘述)
+    animal_update: string; //動物資料異動時間
     cDate: string; //資料更新時間
     shelter_address: string; //地址
     shelter_name: string; //動物所屬收容所名稱
     shelter_tel: string; //連絡電話
-    isLike:boolean; //是否喜歡
+    isLike: boolean; //是否喜歡
+
+    constructor(animal: Animal) {
+        animal.isLike = false;
+        this.setIsLikeProperty(animal);
+    }
+
+    setIsLikeProperty(animal) {
+        let FavoriteList = JSON.parse(window.localStorage.getItem("FavoriteList")) || [];
+        let SubIdList = FavoriteList.map(v => v.animal_subid);
+        if (SubIdList.indexOf(animal.animal_subid) > -1) {
+            animal.isLike = true;
+        };
+        return animal;
+    }
 }
 
 

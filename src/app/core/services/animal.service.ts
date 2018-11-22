@@ -3,18 +3,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 import { Observable, of, Subject } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, map } from 'rxjs/operators';
 import { Animal } from '../../models/animal';
 import { UtilService } from './util.service';
-
+import { environment } from '../../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AnimalService {
   favoriteChangeSubject$ = new Subject();
 
@@ -26,7 +24,7 @@ export class AnimalService {
   }
 
   getAnimalDetail(id: string): Observable<Animal[]> {
-    return this.http.get<Animal[]>('https://animal-proxy-api.herokuapp.com/index.php?&animal_id=' + id)
+    return this.http.get<Animal[]>(environment.api.path + '?&animal_id=' + id)
       .pipe(
         catchError(this.handleError('getAnimalDetail', []))
       );
@@ -37,31 +35,16 @@ export class AnimalService {
     if (this.utilService.isMobile()) { Top = 30; };
     let SkipCount = Top * (page - 1);
     let Params = params;
-    return this.http.get<Animal[]>('https://animal-proxy-api.herokuapp.com/index.php?&$top=' + Top + '&$skip=' + SkipCount + Params)
+    return this.http.get<Animal[]>(environment.api.path + '?&$top=' + Top + '&$skip=' + SkipCount + Params)
       .pipe(
-        // tap(animals => console.log(animals)),
-        tap(animals => this.addIsLikeProperty(animals)),
-        tap(animals => this.setIsLikeProperty(animals)),
+        map((animals:Animal[]) => {
+          animals.forEach(animal => {
+            new Animal(animal);
+          });
+          return animals;
+        }),
         catchError(this.handleError('getAnimals', []))
       );
-  }
-
-  addIsLikeProperty(animals: Animal[]) {
-    let NewAnimals = animals.map(animal => {
-      animal.isLike = false;
-    });
-    return NewAnimals;
-  }
-
-  setIsLikeProperty(animals: Animal[]) {
-    let FavoriteList = JSON.parse(window.localStorage.getItem("FavoriteList")) || [];
-    let SubIdList = FavoriteList.map(v => v.animal_subid);
-    let NewAnimals = animals.map(animal => {
-      if (SubIdList.indexOf(animal.animal_subid) > -1) {
-        animal.isLike = true;
-      }
-    });
-    return NewAnimals;
   }
 
   setFavorite(item: Animal) {

@@ -11,25 +11,25 @@ const routes: Routes = [
     path: 'adopt',
     loadChildren: 'src/app/pages/adopt/adopt.module#AdoptModule',
     data: { title: '首頁' },
-    canActivate:[AutoLoginGuard]
+    canActivate: [AutoLoginGuard]
   },
   {
     path: 'favorite',
     loadChildren: 'src/app/pages/favorite/favorite.module#FavoriteModule',
     data: { title: '我的最愛 ' },
-    canActivate:[AutoLoginGuard]
+    canActivate: [AutoLoginGuard]
   },
   {
     path: 'detail',
     loadChildren: 'src/app/pages/detail/detail.module#DetailModule',
     data: { title: '詳細資訊 ' },
-    canActivate:[AutoLoginGuard]
+    canActivate: [AutoLoginGuard]
   },
   {
-    path:'feedback',
+    path: 'feedback',
     loadChildren: 'src/app/pages/feedback/feedback.module#FeedbackModule',
     data: { title: '建議與回饋' },
-    canActivate:[AutoLoginGuard]
+    canActivate: [AutoLoginGuard]
   },
   {
     path: 'backend/login',
@@ -37,21 +37,21 @@ const routes: Routes = [
     data: { title: '後台登入' }
   },
   {
-    path:'backend/issues',
+    path: 'backend/issues',
     loadChildren: 'src/app/pages/issues/issues.module#IssuesModule',
     data: { title: '意見處理' },
-    canActivate:[AuthGuard]
-  },{
-    path:'backend/archive',
+    canActivate: [AuthGuard]
+  }, {
+    path: 'backend/archive',
     loadChildren: 'src/app/pages/archive/archive.module#ArchiveModule',
     data: { title: '歸檔列表' },
-    canActivate:[AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
-    path:'backend/issue',
+    path: 'backend/issue',
     loadChildren: 'src/app/pages/issue-detail/issue-detail.module#IssueDetailModule',
     data: { title: '意見詳情' },
-    canActivate:[AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: '**',
@@ -64,4 +64,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -10,9 +10,7 @@ import { UtilService } from './util.service';
 
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class FirebaseService {
 
   resetFeedbackFormSubject$ = new Subject();
